@@ -15,6 +15,11 @@ export default function ListCategoriesSpend() {
     const [categoriesTrx, setCategoriesTrx] = useState<TransactionGroupByCategoryType[]>([]);
     const { isLoading, transactions }: InitialSumTransactionByCategoryType = useAppSelector((states) => states.sumTransactionByCategory);
     const dispatch = useDispatch();
+    const dateTrx = {
+        start: moment().format('YYYY-MM') + '-01 00:00:00',
+        end: moment().format('YYYY-MM-DD') + ' 23:59:59',
+        keyString: 'ThisMonth'
+    }
 
     useEffect(() => {
         getTransactionByCategory();
@@ -35,13 +40,10 @@ export default function ListCategoriesSpend() {
     }, [transactions])
 
     const getTransactionByCategory = () => {
-        const start_date = moment().format('YYYY-MM') + '-01 00:00:00';
-        const end_date = moment().format('YYYY-MM-DD') + ' 23:59:59';
-
         dispatch(
             asyncGetTransactionByCategory({
-                start_date: new Date(start_date),
-                end_date: new Date(end_date),
+                start_date: new Date(dateTrx.start),
+                end_date: new Date(dateTrx.end),
                 type: 'outgoing',
             }) as any
         )
@@ -63,6 +65,7 @@ export default function ListCategoriesSpend() {
                 ) :
                     (
                         <CardCategoryOutput
+                            dateTrx={dateTrx}
                             key={item!.category_id}
                             account_id={item!.account_id}
                             id={item!.category_id}
