@@ -11,6 +11,7 @@ import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
 import React, { useEffect, useState } from 'react'
 import { Alert, StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import ImageCropPicker from "react-native-image-crop-picker"
 import { useDispatch } from 'react-redux'
 
 export default function PhotoProfile() {
@@ -51,15 +52,22 @@ export default function PhotoProfile() {
 
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ['images'],
-            allowsEditing: true,
-            aspect: [1, 1],
             quality: 1,
             base64: false,
         });
 
         if (!result.canceled) {
             const asset = result.assets[0];
-            const manipulatedImage = await manipulateImageToWebP(asset.uri);
+            const resultCrop = await ImageCropPicker.openCropper({
+                path: asset.uri,
+                mediaType: 'photo',
+                cropperCircleOverlay: true,
+                cropping: true,
+                showCropGuidelines: false,
+                width: 300,
+                height: 300,
+            });
+            const manipulatedImage = await manipulateImageToWebP(resultCrop.path);
 
             dispatch(
                 asyncUpdateProfileUser({
@@ -89,14 +97,21 @@ export default function PhotoProfile() {
 
         const result = await ImagePicker.launchCameraAsync({
             mediaTypes: ['images'],
-            allowsEditing: true,
-            aspect: [1, 1],
             quality: 1,
         });
 
         if (!result.canceled) {
             const asset = result.assets[0];
-            const manipulatedImage = await manipulateImageToWebP(asset.uri);
+            const resultCrop = await ImageCropPicker.openCropper({
+                path: asset.uri,
+                mediaType: 'photo',
+                cropperCircleOverlay: true,
+                cropping: true,
+                showCropGuidelines: false,
+                width: 300,
+                height: 300,
+            });
+            const manipulatedImage = await manipulateImageToWebP(resultCrop.path);
 
             dispatch(
                 asyncUpdateProfileUser({
@@ -114,6 +129,8 @@ export default function PhotoProfile() {
             )
         }
     }
+
+
 
     return (
         <>

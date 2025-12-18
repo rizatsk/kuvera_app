@@ -105,7 +105,7 @@ export default function TransactionByCategory() {
                     keyExtractor={(item, index) =>
                         isLoading ? index.toString() : item!.id
                     }
-                    contentContainerStyle={{ gap: 2, marginTop: 20 }}
+                    contentContainerStyle={{ gap: 2, marginVertical: 15 }}
                     renderItem={({ item, index }) =>
                         isLoading ?
                             <SkeletonCardTransaction /> :

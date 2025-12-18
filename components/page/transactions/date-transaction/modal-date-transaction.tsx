@@ -121,7 +121,7 @@ const ModalDateTransactions: React.FunctionComponent<DatePickerProps> = (props) 
               activeOpacity={0.6}
               onPress={() => {
                 handleSubmit({
-                  start: moment().subtract(30, 'days').format('YYYY-MM-DD') + ' 00:00:00',
+                  start: moment().format('YYYY-MM') + '-01 00:00:00',
                   end: moment().format('YYYY-MM-DD') + ' 23:59:59',
                   keyString: 'ThisMonth'
                 })
