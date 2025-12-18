@@ -86,7 +86,7 @@ export default function TransactionByCategory() {
             style={{ flex: 1, backgroundColor: "white" }}
         >
             <View style={{ marginVertical: 10 }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 15 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 10 }}>
                     <ModalDateTransactions
                         titleStyle={{ fontWeight: 600, fontSize: 15 }}
                         label="Select Date"
@@ -107,7 +107,7 @@ export default function TransactionByCategory() {
                     keyExtractor={(item, index) =>
                         isLoading ? index.toString() : item!.id
                     }
-                    contentContainerStyle={{ gap: 2, paddingBottom: 20, marginHorizontal: 15 }}
+                    contentContainerStyle={{ flex: 1, gap: 2, paddingBottom: 20, marginHorizontal: 15 }}
                     renderItem={({ item, index }) =>
                         isLoading ?
                             <SkeletonCardTransaction /> :
