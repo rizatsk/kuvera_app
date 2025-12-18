@@ -13,6 +13,7 @@ import { asyncGetTransactionsByCategory } from '@/states/transaction/action';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
 export default function TransactionByCategory() {
@@ -80,10 +81,11 @@ export default function TransactionByCategory() {
     };
 
     return (
-        <View
+        <SafeAreaView
+            edges={['bottom']}
             style={{ flex: 1, backgroundColor: "white" }}
         >
-            <View style={{ marginHorizontal: 10 }}>
+            <View style={{ marginVertical: 10 }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', marginVertical: 15 }}>
                     <ModalDateTransactions
                         titleStyle={{ fontWeight: 600, fontSize: 15 }}
@@ -105,7 +107,7 @@ export default function TransactionByCategory() {
                     keyExtractor={(item, index) =>
                         isLoading ? index.toString() : item!.id
                     }
-                    contentContainerStyle={{ gap: 2, marginVertical: 15 }}
+                    contentContainerStyle={{ gap: 2, paddingBottom: 20, marginHorizontal: 15 }}
                     renderItem={({ item, index }) =>
                         isLoading ?
                             <SkeletonCardTransaction /> :
@@ -126,7 +128,7 @@ export default function TransactionByCategory() {
                     ListEmptyComponent={<NoHaveTransaction />}
                 />
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 
