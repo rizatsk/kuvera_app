@@ -108,6 +108,13 @@ export default function PrivateLayout() {
                             ...OptionStackScreen,
                         }}
                     />
+                    <Stack.Screen
+                        name="stock-idx/detail"
+                        options={{
+                            title: "Detail Stock IDX",
+                            ...OptionStackScreen,
+                        }}
+                    />
                 </Stack>
             )}
         </>

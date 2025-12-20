@@ -1,4 +1,4 @@
-import { ApiIHSGPrice } from "@/service/ihsg/api";
+import { ApiStockIdx } from "@/service/stock-idx/api";
 import { AsyncGetStockIDXPriceType } from "./type";
 
 export function asyncGetStockIDXPrice({ 
@@ -7,7 +7,7 @@ export function asyncGetStockIDXPrice({
     return async (dispatch: any) => {
         try {
             setSkeletonLoading(true)
-            const dataStockIDX = await ApiIHSGPrice();
+            const dataStockIDX = await ApiStockIdx();
             setDataStockIDXSearch(dataStockIDX)
             setDataStockIDX(dataStockIDX)
         } catch (error) {

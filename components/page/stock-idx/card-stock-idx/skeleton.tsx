@@ -6,35 +6,36 @@ export default function SkeletonStockIDX() {
     return (
         <SkeletonPlaceholder>
             <View style={styles.dataTransactionContainer}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                <View style={{ gap: 5, flex: 1 }}>
                     {/* Title */}
-                    <View>
-                        <View style={{ height: 17, width: 80, borderRadius: 4 }} />
-                        <View style={{ height: 16, width: 170, borderRadius: 4, marginTop: 4 }} />
-                        <View style={{ flexDirection: 'row', gap: 10 }}>
-                            <View style={{
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                gap: 2,
-                            }}>
-                                <View style={{ height: 18, width: 18, borderRadius: 4 }} />
-                                <View style={{ height: 16, width: 50, borderRadius: 4, marginTop: 4 }} />
-                            </View>
-                            <View style={{
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                gap: 2,
-                            }}>
-                                <View style={{ height: 18, width: 18, borderRadius: 4 }} />
-                                <View style={{ height: 16, width: 50, borderRadius: 4, marginTop: 4 }} />
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 }}>
+
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                            <View style={{ height: 40, width: 40, borderRadius: 999 }} />
+                            <View>
+                                <View style={{ height: 22, width: 70, borderRadius: 4 }} />
+                                <View style={{ height: 15, width: 120, borderRadius: 4, marginTop: 4 }} />
                             </View>
                         </View>
+                        <View style={{ alignItems: 'flex-end' }}>
+                            <View style={{ height: 16, width: 50, borderRadius: 4 }} />
+                            <View style={{ height: 14, width: 80, borderRadius: 4, marginTop: 4 }} />
+                        </View>
                     </View>
-                </View>
-                {/* Money */}
-                <View style={{ alignItems: 'flex-end' }}>
-                    <View style={{ height: 18, width: 58, borderRadius: 4 }} />
-                    <View style={{ height: 14, width: 80, borderRadius: 4, marginTop: 4 }} />
+                    <View style={{ flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 5, justifyContent: 'space-between' }}>
+                        <View style={{ alignItems: 'center' }}>
+                            <View style={{ height: 14, width: 45, borderRadius: 4 }} />
+                            <View style={{ height: 16, width: 60, borderRadius: 4, marginTop: 4 }} />
+                        </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <View style={{ height: 14, width: 45, borderRadius: 4 }} />
+                            <View style={{ height: 16, width: 60, borderRadius: 4, marginTop: 4 }} />
+                        </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <View style={{ height: 14, width: 45, borderRadius: 4 }} />
+                            <View style={{ height: 16, width: 60, borderRadius: 4, marginTop: 4 }} />
+                        </View>
+                    </View>
                 </View>
             </View>
         </SkeletonPlaceholder>

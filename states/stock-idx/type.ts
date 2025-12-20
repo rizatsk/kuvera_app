@@ -1,19 +1,17 @@
 import { Dispatch, SetStateAction } from "react"
 
-export type DataStocksIDXType = {
-    "No": number
-    "StockCode": string
-    "StockName": string
-    "Close": number
-    "Previous": number
-    "Change": number
-    "Percentage": number
-    "High": number
-    "Low": number
+export type DataStocksProps = {
+    stockCode: string
+    stockName: string
+    logoId: string
+    price: number
+    change: number
+    dividen: number
+    analyst: string
 }
 
 export type AsyncGetStockIDXPriceType = {
-    setDataStockIDX: Dispatch<SetStateAction<DataStocksIDXType[]>>
-    setDataStockIDXSearch: Dispatch<SetStateAction<DataStocksIDXType[]>>
+    setDataStockIDX: Dispatch<SetStateAction<DataStocksProps[]>>
+    setDataStockIDXSearch: Dispatch<SetStateAction<DataStocksProps[]>>
     setSkeletonLoading: Dispatch<SetStateAction<boolean>>
 }

@@ -2,11 +2,12 @@ import CustomText from '@/components/custom-text';
 import { Colors } from '@/constants/theme';
 import closeOrBidIHSG from '@/helper/closeOrBidIHSG';
 import { asyncGetStockIDXPrice } from '@/states/stock-idx/action';
-import { DataStocksIDXType } from '@/states/stock-idx/type';
-import Entypo from '@expo/vector-icons/Entypo';
-import { useFocusEffect } from 'expo-router';
+import { DataStocksProps } from '@/states/stock-idx/type';
+import { Entypo } from '@expo/vector-icons';
+import { Image } from 'expo-image';
+import { router, useFocusEffect } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
-import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import IsNotFoundStockIDX from './is-not-found';
 import SkeletonStockIDX from './skeleton';
@@ -14,11 +15,11 @@ import SkeletonStockIDX from './skeleton';
 type CardStockIdxProps = {
     code: string
     nameCompany: string
-    priceHigh: number
-    priceLow: number
-    priceClose: number
+    logoId: string
+    price: number,
     change: number
-    percentage: number
+    dividen: number
+    analyst: string
 }
 
 type ListCardStockIdxProps = {
@@ -27,11 +28,11 @@ type ListCardStockIdxProps = {
 
 export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
     const dispatch = useDispatch();
-    const [dataStockIDX, setDataStockIDX] = useState<DataStocksIDXType[]>([]);
-    const [dataStockIDXSearch, setDataStockIDXSearch] = useState<DataStocksIDXType[]>([]);
+    const [dataStockIDX, setDataStockIDX] = useState<DataStocksProps[]>([]);
+    const [dataStockIDXSearch, setDataStockIDXSearch] = useState<DataStocksProps[]>([]);
     const [skeletonLoading, setSkeletonLoading] = useState(true)
     const [refresh, setRefresh] = useState(false);
-    const API_FETCH_INTERVAL = 3000;
+    const API_FETCH_INTERVAL = 60000;
 
     useFocusEffect(
         useCallback(() => {
@@ -62,8 +63,8 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
                     const lowerQuery = keyword.toLowerCase();
                     const searchDataIDX = dataStockIDX.filter(
                         (item) =>
-                            item.StockCode.toLowerCase().includes(lowerQuery) ||
-                            item.StockName.toLowerCase().includes(lowerQuery)
+                            item.stockCode.toLowerCase().includes(lowerQuery) ||
+                            item.stockName.toLowerCase().includes(lowerQuery)
                     );
                     setDataStockIDXSearch(searchDataIDX)
                     break;
@@ -93,33 +94,33 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
             asyncGetStockIDXPrice({
                 setDataStockIDX,
                 setDataStockIDXSearch,
-                setSkeletonLoading: () => {}
+                setSkeletonLoading: () => { }
             }) as any
         )
     }
 
     return (
-        <FlatList<DataStocksIDXType | undefined>
+        <FlatList<DataStocksProps | undefined>
             refreshControl={<RefreshControl refreshing={refresh} onRefresh={fetchRefreshing} />}
             scrollEnabled={true}
             data={skeletonLoading ? Array.from({ length: 13 }) : dataStockIDXSearch}
             keyExtractor={(item, index) =>
-                skeletonLoading ? index.toString() : item!.No.toString()
+                skeletonLoading ? index.toString() : item!.stockCode.toString()
             }
-            contentContainerStyle={{ gap: 10, paddingVertical: 15, marginHorizontal: 18 }}
+            contentContainerStyle={{ gap: 20, paddingVertical: 15 }}
             ListEmptyComponent={<IsNotFoundStockIDX />}
             renderItem={({ item }) =>
                 skeletonLoading ?
                     <SkeletonStockIDX /> :
                     (
                         <CardStockIdx
-                            code={item!.StockCode}
-                            nameCompany={item!.StockName}
-                            priceHigh={item!.High}
-                            priceLow={item!.Low}
-                            priceClose={item!.Close}
-                            change={item!.Change}
-                            percentage={item!.Percentage}
+                            code={item!.stockCode}
+                            nameCompany={item!.stockName}
+                            price={item!.price}
+                            logoId={item!.logoId}
+                            dividen={item!.dividen}
+                            change={item!.change}
+                            analyst={item!.analyst}
                         />
                     )
             }
@@ -127,53 +128,77 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
     )
 }
 
-function CardStockIdx({ code, nameCompany, priceHigh, priceLow, priceClose, change, percentage }: CardStockIdxProps) {
+function CardStockIdx({ code, nameCompany, price, logoId, change, dividen, analyst }: CardStockIdxProps) {
     const statusColor = change < 0 ? Colors.red[500] : Colors.moneyGreenKuvera;
+    const upOrDown = change < 0 ? "triangle-down" : "triangle-up";
+    const colorAnalyst = analyst == 'Netral' ? Colors.grey[500] : Colors.tealDarkKuvera;
+
+    const detailButtonHandler = (stockCode: string) => {
+        router.push({
+            pathname: '/(private)/stock-idx/detail',
+            params: {
+                stockCode
+            }
+        })
+    }
 
     return (
-        <View style={styles.dataTransactionContainer}>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+        <TouchableOpacity 
+            onPress={() => detailButtonHandler(code)}
+            activeOpacity={0.6}
+            style={styles.dataTransactionContainer} >
+            <View style={{ gap: 5, flex: 1 }}>
                 {/* Title */}
-                <View>
-                    <CustomText style={{ fontSize: 16, fontWeight: 600 }}>{code}</CustomText>
-                    <CustomText style={{ fontSize: 12 }}>{nameCompany}</CustomText>
-                    <View style={{ flexDirection: 'row', gap: 10 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 }}>
+
+                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                        <Image source={`https://s3-symbol-logo.tradingview.com/${logoId}.svg`}
+                            style={{ width: 35, height: 35, borderRadius: 999, overflow: 'hidden' }}
+                            contentFit="fill" />
+                        <View>
+                            <CustomText style={{ fontSize: 16, fontWeight: 600 }}>{code}</CustomText>
+                            <CustomText style={{ fontSize: 12 }}>{nameCompany}</CustomText>
+                        </View>
+                    </View>
+                    <View style={{alignItems: 'flex-end'}}>
+                        <CustomText style={{fontSize: 12}}>Analyst</CustomText>
+                        <CustomText style={{
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: colorAnalyst,
+                        }}>{analyst}</CustomText>
+                    </View>
+                </View>
+                <View style={{ flexDirection: 'row', paddingHorizontal: 20, paddingVertical: 5, justifyContent: 'space-between', backgroundColor: Colors.tealLightKuvera + 20 }}>
+                    <View style={{ alignItems: 'center' }}>
+                        <CustomText>Price</CustomText>
+                        <CustomText style={styles.price}>Rp {price}</CustomText>
+                    </View>
+                    <View style={{ alignItems: 'center' }}>
+                        <CustomText>Change</CustomText>
                         <View style={{
                             flexDirection: 'row',
                             alignItems: 'center',
                             gap: 2,
                         }}>
-                            <Entypo name="triangle-up" size={18} color={Colors.tealKuvera} />
-                            <CustomText style={styles.priceHigh}>Rp {priceHigh}</CustomText>
+                            <Entypo name={upOrDown} size={18} color={statusColor} />
+                            <CustomText style={{
+                                fontSize: 13,
+                                fontWeight: 600,
+                                color: statusColor
+                            }}>{change}%</CustomText>
                         </View>
-                        <View style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            gap: 2,
-                        }}>
-                            <Entypo name="triangle-down" size={18} color={Colors.goldCOlor} />
-                            <CustomText style={styles.priceLow}>Rp {priceLow}</CustomText>
-                        </View>
+                    </View>
+                    <View style={{ alignItems: 'center' }}>
+                        <CustomText>Dividen</CustomText>
+                        <CustomText style={{
+                            fontSize: 13,
+                            fontWeight: 600,
+                        }}>{dividen}%</CustomText>
                     </View>
                 </View>
             </View>
-            {/* Money */}
-            <View style={{ alignItems: 'flex-end' }}>
-                <CustomText style={{ fontWeight: 600, color: statusColor }}>Rp {priceClose}</CustomText>
-                <CustomText style={{
-                    color: 'white',
-                    fontSize: 12,
-                    fontWeight: 500,
-                    backgroundColor: statusColor,
-                    paddingHorizontal: 6,
-                    paddingVertical: 2,
-                    borderRadius: 5,
-                }}
-                >
-                    {change} ({percentage}%)
-                </CustomText>
-            </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -183,16 +208,10 @@ const styles = StyleSheet.create({
         paddingVertical: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
     },
-    priceHigh: {
+    price: {
         fontSize: 13,
         fontWeight: 600,
-        color: Colors.tealKuvera,
     },
-    priceLow: {
-        fontSize: 13,
-        fontWeight: 600,
-        color: Colors.goldCOlor,
-    }
 });
