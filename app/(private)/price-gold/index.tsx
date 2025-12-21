@@ -56,7 +56,7 @@ export default function PriceGoldPage() {
                         key={item.berat}
                         weight={item.berat}
                         price_buy={item.harga_jual}
-                        price_buyback={item.harga_jual}
+                        price_buyback={item.harga_buyback}
                     />
                 }
                 ListEmptyComponent={
