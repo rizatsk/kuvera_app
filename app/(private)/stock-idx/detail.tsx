@@ -86,7 +86,7 @@ export default function DetailStockIdxPage() {
 
   return (
     <SafeAreaView
-      edges={['top', 'bottom']}
+      edges={['bottom']}
       style={styles.container}
     >
       <WebView
