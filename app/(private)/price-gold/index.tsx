@@ -5,7 +5,7 @@ import { AsyncGetGoldPrice } from '@/states/gold-antam-price/action';
 import { ListGoldProps } from '@/states/gold-antam-price/type';
 import { Image } from 'expo-image';
 import React, { useEffect, useState } from 'react';
-import { RefreshControl, SectionList } from 'react-native';
+import { RefreshControl, SectionList, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 
@@ -18,7 +18,7 @@ export default function PriceGoldPage() {
     }, []);
 
     const dispatch = useDispatch();
-    
+
     function getListGold() {
         dispatch(
             AsyncGetGoldPrice({
@@ -31,7 +31,7 @@ export default function PriceGoldPage() {
     return (
         <SafeAreaView
             edges={['bottom']}
-            style={{ paddingVertical: 10, backgroundColor: 'white' }}
+            style={{ flex: 1, paddingVertical: 10, backgroundColor: 'white' }}
         >
             <SectionList
                 sections={listGold}
@@ -66,7 +66,15 @@ export default function PriceGoldPage() {
                                 <SkeletonPriceAntam key={i} />
                             ))}
                         </> :
-                        <CustomText>Tidak ada data</CustomText>
+                        <View style={{ alignItems: 'center', marginHorizontal: 18, marginTop: 20 }}>
+                            <Image
+                                style={{ height: 160, width: 160 }}
+                                contentFit='contain'
+                                source={require("@/assets/images/404-error.png")} />
+                            <CustomText style={{ textAlign: 'center', fontWeight: 500, marginTop: 10 }}>
+                                Gold price data cannot be displayed at the moment. Please try again in a few moments.
+                            </CustomText>
+                        </View>
                 }
             />
         </SafeAreaView>
