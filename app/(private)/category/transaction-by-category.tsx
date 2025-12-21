@@ -103,11 +103,11 @@ export default function TransactionByCategory() {
                 </View>
                 <FlatList<TransactionsByCategory | undefined>
                     refreshControl={<RefreshControl refreshing={isLoading} onRefresh={getTransactionByCategory} />}
-                    data={isLoading ? Array.from({ length: 10 }) : transactions}
+                    data={isLoading ? Array.from({ length: 15 }) : transactions}
                     keyExtractor={(item, index) =>
                         isLoading ? index.toString() : item!.id
                     }
-                    contentContainerStyle={{ flex: 1, gap: 2, paddingBottom: 20, marginHorizontal: 15 }}
+                    contentContainerStyle={{ gap: 2, paddingBottom: 90, marginHorizontal: 15 }}
                     renderItem={({ item, index }) =>
                         isLoading ?
                             <SkeletonCardTransaction /> :

@@ -2,7 +2,7 @@ import CustomText from '@/components/custom-text';
 import ListCardRecent from '@/components/page/home/card-recent.tsx/listCardRecent';
 import ListCategoriesSpend from '@/components/page/home/categories-spend/listCategoriesSpend';
 import HeaderHome from '@/components/page/home/header';
-import CardGoldAntamPrice from '@/components/page/home/price-antam/cardGoldAntamPrice';
+import ListCardGoldAntamPrice from '@/components/page/home/price-antam/listCardGoldAntamPrice';
 import InvestAccountValue from '@/components/page/home/spent-account-value';
 import { useAppSelector } from '@/states';
 import { actionHomeRefresh } from '@/states/home-refresh/action';
@@ -25,6 +25,12 @@ export default function HomeScreen() {
   const handleAllCategory = () => {
     router.push({
       pathname: '/(private)/category/all-category'
+    })
+  };
+
+  const handleAllPriceGold = () => {
+    router.push({
+      pathname: '/(private)/price-gold'
     })
   }
 
@@ -57,8 +63,9 @@ export default function HomeScreen() {
           <View style={{ paddingHorizontal: 10 }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 15 }}>
               <CustomText style={{ fontWeight: 600, fontSize: 16 }}>Price Antam Today</CustomText>
+              <Entypo name="chevron-right" size={24} color="black" onPress={handleAllPriceGold}/>
             </View>
-            <CardGoldAntamPrice />
+            <ListCardGoldAntamPrice />
           </View>
         </View>
 

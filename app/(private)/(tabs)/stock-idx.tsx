@@ -1,5 +1,5 @@
 import CustomText from '@/components/custom-text';
-import CardStockIdx from '@/components/page/stock-idx/card-stock-idx';
+import ListCardStockIdx from '@/components/page/stock-idx/card-stock-idx';
 import SearchStock from '@/components/page/stock-idx/search-stock';
 import { useState } from 'react';
 import { View } from 'react-native';
@@ -21,7 +21,7 @@ export default function StockIdxScreen() {
         </CustomText>
       </View>
       <SearchStock onSearch={setSearchStock} />
-      <CardStockIdx keyword={searchStock} />
+      <ListCardStockIdx keyword={searchStock} />
     </SafeAreaView>
   );
 }

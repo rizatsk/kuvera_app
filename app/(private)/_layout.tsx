@@ -115,6 +115,13 @@ export default function PrivateLayout() {
                             ...OptionStackScreen,
                         }}
                     />
+                    <Stack.Screen
+                        name="price-gold/index"
+                        options={{
+                            title: "Price Gold",
+                            ...OptionStackScreen,
+                        }}
+                    />
                 </Stack>
             )}
         </>

@@ -40,19 +40,22 @@ export default function DetailTransaction() {
 
     return (
         <View
-            style={{ flex: 1, backgroundColor: "white", paddingVertical: 10 }}
+            style={{ flex: 1, backgroundColor: "white" }}
         >
-            <View style={{ marginHorizontal: 20, paddingHorizontal: 5 }}>
+            <View>
                 {/* Header */}
-                <View style={{ alignItems: 'center', marginTop: 10 }}>
-                    <IconComponent />
+                <View style={{ backgroundColor: Colors.tealLightKuvera + 20, paddingVertical: 10 }}>
+
+                    <View style={{ alignItems: 'center', marginTop: 10 }}>
+                        <IconComponent />
+                    </View>
+                    <View style={{ alignItems: 'center', marginTop: 20, gap: 10 }}>
+                        <CustomText>ID Transaction</CustomText>
+                        <CustomText style={{ fontSize: 15, fontWeight: 600 }}>{id}</CustomText>
+                    </View>
                 </View>
                 {/* Detail */}
-                <View style={{ alignItems: 'center', marginTop: 20, gap: 10 }}>
-                    <CustomText>ID Transaction</CustomText>
-                    <CustomText style={{ fontSize: 15, fontWeight: 600 }}>{id}</CustomText>
-                </View>
-                <View style={{ marginTop: 20 }}>
+                <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
                     <View style={styles.containerListData}>
                         <CustomText>Type :</CustomText>
                         <CustomText style={styles.dataText}>{strType}</CustomText>
@@ -76,11 +79,13 @@ export default function DetailTransaction() {
                 </View>
 
                 {/* Button */}
-                <TouchableOpacity style={styles.buttonEdit} activeOpacity={0.6} onPress={handleButtonDetail} >
-                    <Feather name="edit" size={20} color="white" />
-                    <CustomText style={{ fontSize: 15, fontWeight: 600, color: "white" }}>Edit Data</CustomText>
-                </TouchableOpacity>
-                <ButtonDeleteTransaction id={id as string} />
+                <View style={{ paddingHorizontal: 20 }}>
+                    <TouchableOpacity style={styles.buttonEdit} activeOpacity={0.6} onPress={handleButtonDetail} >
+                        <Feather name="edit" size={20} color="white" />
+                        <CustomText style={{ fontSize: 15, fontWeight: 600, color: "white" }}>Edit Data</CustomText>
+                    </TouchableOpacity>
+                    <ButtonDeleteTransaction id={id as string} />
+                </View>
             </View>
         </View>
     );

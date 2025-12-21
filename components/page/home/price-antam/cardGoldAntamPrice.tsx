@@ -1,12 +1,7 @@
-import CustomText from '@/components/custom-text'
-import { Colors } from '@/constants/theme'
-import { useAppSelector } from '@/states'
-import { AsyncGetAntamGoldPrice } from '@/states/gold-antam-price/action'
-import { AntDesign } from '@expo/vector-icons'
-import React, { useEffect, useState } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
-import { useDispatch } from 'react-redux'
-import SkeletonPriceAntam from './skeleton'
+import CustomText from "@/components/custom-text"
+import { Colors } from "@/constants/theme"
+import { Image } from "expo-image"
+import { StyleSheet, View } from "react-native"
 
 type ListCardGoldAntamPriceProps = {
     weight: string
@@ -14,65 +9,16 @@ type ListCardGoldAntamPriceProps = {
     price_buyback: string
 }
 
-export type GoldAntam = {
-    berat: string
-    harga_buyback: string
-    harga_jual: string
-}
-
-export default function CardGoldAntamPrice() {
-    const homeRefresh = useAppSelector((states) => states.homeRefresh);
-    const dispatch = useDispatch();
-    const [skeletonLoading, setSkeletonLoading] = useState(true);
-    const [listGoldAntam, setListGoldAntam] = useState<GoldAntam[]>([]);
-
-    useEffect(() => {
-        getAntamGoldPrice()
-    }, [])
-
-    useEffect(() => {
-        // Jalankan saat homeRefresh true
-        if (homeRefresh) {
-            getAntamGoldPrice()
-        }
-    }, [homeRefresh])
-
-    function getAntamGoldPrice() {
-        dispatch(
-            AsyncGetAntamGoldPrice({ setListGoldAntam, setSkeletonLoading }) as any
-        );
-    }
-
-    return (
-        <FlatList<GoldAntam | undefined>
-            scrollEnabled={false}
-            data={skeletonLoading ? Array.from({ length: 6 }) : listGoldAntam}
-            keyExtractor={(item, index) =>
-                skeletonLoading ? index.toString() : item!.berat
-            }
-            contentContainerStyle={{ gap: 15 }}
-            renderItem={({ item }) =>
-                skeletonLoading ?
-                    <SkeletonPriceAntam /> :
-                    (
-                        <ListCardGoldAntamPrice
-                            weight={item!.berat}
-                            price_buy={item!.harga_jual}
-                            price_buyback={item!.harga_buyback}
-                        />
-                    )
-            }
-            ListEmptyComponent={<CustomText style={{textAlign: 'center', marginVertical: 20}}>Price gold Antam is not available</CustomText>}
-        />
-    )
-}
-
-const ListCardGoldAntamPrice = ({ weight, price_buy, price_buyback }: ListCardGoldAntamPriceProps) => {
+export default function CardGoldAntamPrice({ weight, price_buy, price_buyback }: ListCardGoldAntamPriceProps) {
     return (
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: 'center' }}>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
                 <View style={styles.containerIcon}>
-                    <AntDesign name="gold" size={26} color="white" />
+                    <Image
+                        source={require(`@/assets/images/icon/gold.png`)}
+                        style={{ height: 35, width: 35 }}
+                        contentFit='contain'
+                    />
                 </View>
                 <View>
                     <CustomText style={{ fontWeight: 500, fontSize: 15 }}>{weight} gram</CustomText>
@@ -92,11 +38,13 @@ const ListCardGoldAntamPrice = ({ weight, price_buy, price_buyback }: ListCardGo
 
 const styles = StyleSheet.create({
     containerIcon: {
-        width: 40,
-        height: 40,
+        width: 45,
+        height: 45,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10000,
-        backgroundColor: Colors.goldCOlor,
+        borderRadius: 999,
+        backgroundColor: Colors.goldCOlor + 40,
+        // borderColor: Colors.goldCOlor,
+        // borderWidth: 2,
     }
 })
