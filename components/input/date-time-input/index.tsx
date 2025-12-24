@@ -149,7 +149,7 @@ const DateTimeInput: React.FunctionComponent<CalenderInputProps> = (props) => {
                 </View>
 
                 <TouchableOpacity activeOpacity={0.6} style={modalStyles.buttonSave} onPress={() => handleSubmit()}>
-                    <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Simpan</CustomText>
+                    <CustomText style={{ color: "white", fontSize: 15, fontWeight: '500' }}>Select Date</CustomText>
                 </TouchableOpacity>
             </ModalKuvera>
         </InputFieldKuvera>
