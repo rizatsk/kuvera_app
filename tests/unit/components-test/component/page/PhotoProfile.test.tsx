@@ -1,6 +1,6 @@
 import PhotoProfile from '@/components/page/profile/photo-profile';
 import { configureStore } from '@reduxjs/toolkit';
-import { render } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Provider } from 'react-redux';
 
@@ -63,4 +63,34 @@ describe('PhotoProfile Component', () => {
     expect(getByText('John Doe')).toBeTruthy();
     expect(getByText('john@example.com')).toBeTruthy();
   });
+
+  it('should display user photo profile image', () => {
+    // Act
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <PhotoProfile />
+      </Provider>
+    );
+
+    // Assert
+    const profileImage = getByTestId('profile-photo');
+    expect(profileImage).toBeTruthy();
+  });
+
+  it('should handle image picker when user taps change photo button', () => {
+    // Act
+    const { getByTestId, getByText } = render(
+      <Provider store={store}>
+        <PhotoProfile />
+      </Provider>
+    );
+
+    const changePhotoButton = getByTestId('change-photo-button');
+    fireEvent.press(changePhotoButton);
+    
+    // Assert
+    expect(getByTestId('modal-change-profile-photo')).toBeTruthy();
+    expect(getByText('Open Camera')).toBeTruthy();
+    expect(getByText('Open Galery')).toBeTruthy();
+  });  
 });

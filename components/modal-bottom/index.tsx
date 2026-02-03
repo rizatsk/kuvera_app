@@ -12,6 +12,7 @@ const START_POSITION = height;
 const END_POSITION = 0;
 
 type ModelKuveraProps = {
+    testID?: string
     title: string
     isModalVisible: boolean
     setIsModalVisible: (visible: boolean) => void
@@ -20,7 +21,7 @@ type ModelKuveraProps = {
 }
 
 export default function ModalKuvera({
-    title, isModalVisible, setIsModalVisible, setFocused = () => {}, children
+    testID = 'modal-kuvera', title, isModalVisible, setIsModalVisible, setFocused = () => {}, children
 }: ModelKuveraProps) {
     const slideAnim = useRef(new Animated.Value(START_POSITION));
 
@@ -56,6 +57,7 @@ export default function ModalKuvera({
 
     return (
         <Modal
+            testID={testID}
             animationType="none"
             transparent={true}
             visible={isModalVisible}

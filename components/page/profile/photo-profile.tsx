@@ -20,7 +20,7 @@ export default function PhotoProfile() {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const selectOptions = [
-        { key: 'open-camera', value: 'Open Kamera' },
+        { key: 'open-camera', value: 'Open Camera' },
         { key: 'open-galery', value: 'Open Galery' },
     ];
 
@@ -65,10 +65,12 @@ export default function PhotoProfile() {
             <View style={{ marginHorizontal: 18, marginTop: 25, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', gap: 15, alignItems: 'center' }}>
                     <TouchableOpacity
+                        testID='change-photo-button'
                         onPress={() => setIsModalVisible(true)}
                         activeOpacity={0.6}
                         style={styles.containerAvatar} >
                         <Image
+                            testID='profile-photo'
                             style={{ height: 65, width: 65, borderRadius: 1000, overflow: 'hidden' }}
                             contentFit='contain'
                             source={authUser.photo_profile_url} />
@@ -88,6 +90,7 @@ export default function PhotoProfile() {
                 </View>
             </View>
             <ModalKuvera
+                testID='modal-change-profile-photo'
                 title={'Change Photo Profile'}
                 isModalVisible={isModalVisible}
                 setIsModalVisible={setIsModalVisible}
