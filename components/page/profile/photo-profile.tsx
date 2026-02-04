@@ -2,7 +2,8 @@ import CustomText from '@/components/custom-text'
 import { modalStyles } from '@/components/input/radio-input/style'
 import ModalKuvera from '@/components/modal-bottom'
 import { Colors } from '@/constants/theme'
-import manipulateImageToWebP from '@/helper/manipulateImage'
+import pickCameraImage from '@/helper/get-pictures/pick-camera-image'
+import pickImage from '@/helper/get-pictures/pick-image'
 import { useAppSelector } from '@/states'
 import { asyncUpdateProfileUser } from '@/states/auth-user/action'
 import { AuthUserType } from '@/states/auth-user/type'
@@ -10,8 +11,7 @@ import { Feather, Ionicons } from '@expo/vector-icons'
 import { Image } from 'expo-image'
 import * as ImagePicker from 'expo-image-picker'
 import React, { useEffect, useState } from 'react'
-import { Alert, StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native'
-import ImageCropPicker from "react-native-image-crop-picker"
+import { StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 
 export default function PhotoProfile() {
@@ -20,7 +20,7 @@ export default function PhotoProfile() {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const selectOptions = [
-        { key: 'open-camera', value: 'Open Kamera' },
+        { key: 'open-camera', value: 'Open Camera' },
         { key: 'open-galery', value: 'Open Galery' },
     ];
 
@@ -33,114 +33,44 @@ export default function PhotoProfile() {
     }, [])
 
     const handleSubmit = async (option: { key: string, value: string }) => {
+        let resultImage = null;
         if (option.key === 'open-galery') {
-            await pickImage();
+            resultImage = await pickImage();
         } else {
-            await pickCameraImage();
+            resultImage = await pickCameraImage();
+        }
+
+        if (resultImage) {
+            dispatch(
+                asyncUpdateProfileUser({
+                    param: {
+                        photo_profile: {
+                            name: resultImage?.fileName as string,
+                            uri: resultImage?.uri,
+                            type: resultImage?.mimeType as string
+                        },
+                    },
+                    successHandler: () => {
+                        ToastAndroid.show('Success update photo profile', 500)
+                    }
+                }) as any
+            )
         }
 
         setIsModalVisible(false);
     }
-
-    const pickImage = async () => {
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-        if (!permissionResult.granted) {
-            Alert.alert('Permission required', 'Permission to access the media library is required.');
-            return;
-        }
-
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images'],
-            quality: 1,
-            base64: false,
-        });
-
-        if (!result.canceled) {
-            const asset = result.assets[0];
-            const resultCrop = await ImageCropPicker.openCropper({
-                path: asset.uri,
-                mediaType: 'photo',
-                cropperCircleOverlay: true,
-                cropping: true,
-                showCropGuidelines: false,
-                width: 300,
-                height: 300,
-            });
-            const manipulatedImage = await manipulateImageToWebP(resultCrop.path);
-
-            dispatch(
-                asyncUpdateProfileUser({
-                    param: {
-                        photo_profile: {
-                            name: asset.fileName as string,
-                            uri: manipulatedImage.uri,
-                            type: asset.mimeType as string
-                        },
-                    },
-                    successHandler: () => {
-                        ToastAndroid.show('Success update photo profile', 500)
-                    }
-                }) as any
-            )
-        }
-    }
-
-    const pickCameraImage = async () => {
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        const permissionCameraResult = await ImagePicker.requestCameraPermissionsAsync();
-
-        if (!permissionResult.granted || !permissionCameraResult.granted) {
-            Alert.alert('Permission required', 'Permission to access the media library and camera is required.');
-            return;
-        }
-
-        const result = await ImagePicker.launchCameraAsync({
-            mediaTypes: ['images'],
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            const asset = result.assets[0];
-            const resultCrop = await ImageCropPicker.openCropper({
-                path: asset.uri,
-                mediaType: 'photo',
-                cropperCircleOverlay: true,
-                cropping: true,
-                showCropGuidelines: false,
-                width: 300,
-                height: 300,
-            });
-            const manipulatedImage = await manipulateImageToWebP(resultCrop.path);
-
-            dispatch(
-                asyncUpdateProfileUser({
-                    param: {
-                        photo_profile: {
-                            name: asset.fileName as string,
-                            uri: manipulatedImage.uri,
-                            type: asset.mimeType as string
-                        },
-                    },
-                    successHandler: () => {
-                        ToastAndroid.show('Success update photo profile', 500)
-                    }
-                }) as any
-            )
-        }
-    }
-
-
 
     return (
         <>
             <View style={{ marginHorizontal: 18, marginTop: 25, flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', gap: 15, alignItems: 'center' }}>
                     <TouchableOpacity
+                        testID='change-photo-button'
                         onPress={() => setIsModalVisible(true)}
                         activeOpacity={0.6}
                         style={styles.containerAvatar} >
                         <Image
+                            testID='profile-photo'
                             style={{ height: 65, width: 65, borderRadius: 1000, overflow: 'hidden' }}
                             contentFit='contain'
                             source={authUser.photo_profile_url} />
@@ -160,6 +90,7 @@ export default function PhotoProfile() {
                 </View>
             </View>
             <ModalKuvera
+                testID='modal-change-profile-photo'
                 title={'Change Photo Profile'}
                 isModalVisible={isModalVisible}
                 setIsModalVisible={setIsModalVisible}
@@ -177,7 +108,6 @@ export default function PhotoProfile() {
                     ))}
                 </View>
             </ModalKuvera>
-
         </>
     )
 }

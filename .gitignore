@@ -44,3 +44,5 @@ app-example
 .env.production
 google-services.json
 GoogleService-Info.plist
+
+coverage/
