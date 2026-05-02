@@ -7,7 +7,7 @@
     "reset-project": "node ./scripts/reset-project.js",
     "android:dev": "NODE_ENV=development expo run:android",
     "android": "expo run:android",
-    "build:android:prod": "eas build --profile production --platform android --local",
+    "build:android:prod": "NODE_ENV=production eas build --platform android --local",
     "eas:build:android:prod": "eas build --profile production --platform android",
     "eas:build:ios:prod": "eas build --profile production --platform ios",
     "eas:build:ios:dev": "eas build --profile development --platform ios",
