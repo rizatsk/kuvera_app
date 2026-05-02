@@ -98,6 +98,7 @@ export default function FormAddIncome() {
                 {(FormikProps) => (
                     <View style={{ gap: 18, marginTop: 15 }}>
                         <RadioInput
+                            testID='input-select-category'
                             accessible={true}
                             label='Category'
                             placeholder="Category"
@@ -107,12 +108,14 @@ export default function FormAddIncome() {
                             errorMessage={FormikProps.errors.category?.id && FormikProps.touched.category?.id ? FormikProps.errors.category.id : ""}
                         />
                         <DateTimeinput
+                            testID='input-select-date'
                             label='Date & time spending'
                             onSelectDate={(value) => FormikProps.setFieldValue("date", value)}
                             value={FormikProps.values.date}
                             errorMessage={FormikProps.errors.date && FormikProps.touched.date ? FormikProps.errors.date : ""}
                         />
                         <TextInput
+                            testID='input-money-income'
                             label='Money Income'
                             value={FormikProps.values.spend}
                             accessible={true}
@@ -122,13 +125,14 @@ export default function FormAddIncome() {
                             errorMessage={FormikProps.errors.spend && FormikProps.touched.spend ? FormikProps.errors.spend : ""}
                         />
                         <TextInput
+                            testID='input-notes'
                             label='Notes'
                             value={FormikProps.values.notes}
                             accessible={true}
                             onChangeText={FormikProps.handleChange('notes')}
                             errorMessage={FormikProps.errors.notes && FormikProps.touched.notes ? FormikProps.errors.notes : ""}
                         />
-                        <TouchableOpacity activeOpacity={0.6} style={style.button_lanjut} onPress={() => FormikProps.handleSubmit()}>
+                        <TouchableOpacity testID='button-save' activeOpacity={0.6} style={style.button_lanjut} onPress={() => FormikProps.handleSubmit()}>
                             <CustomText style={{ fontWeight: 600, color: "white", fontSize: 16 }}>Save Income</CustomText>
                         </TouchableOpacity>
                     </View>

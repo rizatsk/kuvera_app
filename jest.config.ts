@@ -4,7 +4,7 @@ const config: Config = {
   preset: 'jest-expo',
   collectCoverage: true,
   collectCoverageFrom: [
-    "**/*.{ts,tsx,js,jsx}",
+    "**/*.{ts,tsx}",
     '!**/node_modules/**',
     '!**/jest.config.ts/**',
     "!**/coverage/**",

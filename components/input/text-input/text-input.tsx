@@ -14,6 +14,7 @@ export const TextInput: React.FunctionComponent<InputProps> = (props) => {
     showSoftInputOnFocus = true,
     inputType = 'text',
     onChangeText,
+    testID,
     ...rest
   } = props;
   const [focused, setFocused] = useState(false);
@@ -47,6 +48,7 @@ export const TextInput: React.FunctionComponent<InputProps> = (props) => {
 
   return (
     <InputFieldKuvera 
+      testID={testID}
       counter={counter}
       value={value}
       label={label}

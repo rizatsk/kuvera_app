@@ -41,6 +41,7 @@ export default function PhotoProfile() {
         }
 
         if (resultImage) {
+            console.log('Result image', resultImage);    
             dispatch(
                 asyncUpdateProfileUser({
                     param: {
@@ -98,6 +99,7 @@ export default function PhotoProfile() {
                 <View style={modalStyles.optionsContainer}>
                     {selectOptions.map((option) => (
                         <TouchableOpacity
+                            testID={`button-${option.key}`}
                             activeOpacity={0.6}
                             key={option.key}
                             style={modalStyles.optionItem}

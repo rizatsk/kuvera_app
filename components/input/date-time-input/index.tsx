@@ -14,10 +14,8 @@ const DateTimeInput: React.FunctionComponent<CalenderInputProps> = (props) => {
         value,
         label,
         errorMessage,
-        helperMessage,
-        isError,
+        testID,
         onSelectDate,
-        ...rest
     } = props;
 
     const initialDate = new Date();
@@ -131,6 +129,7 @@ const DateTimeInput: React.FunctionComponent<CalenderInputProps> = (props) => {
 
     return (
         <InputFieldKuvera 
+            testID={testID}
             value={value && formatDateTimeVerbose(value)}
             label={label}
             focused={focused}
@@ -139,6 +138,7 @@ const DateTimeInput: React.FunctionComponent<CalenderInputProps> = (props) => {
             handleOnFocus={handleOnFocus}
         >
             <ModalKuvera
+                testID={`modal-${testID}`}
                 title={label}
                 isModalVisible={isModalVisible}
                 setIsModalVisible={setIsModalVisible}

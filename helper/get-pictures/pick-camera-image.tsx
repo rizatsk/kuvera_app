@@ -39,7 +39,11 @@ const pickCameraImage = async (): Promise<ResultPickCameraImageType | null> => {
         });
         const manipulatedImage = await manipulateImageToWebP(resultCrop.path);
 
-        return manipulatedImage;
+        return {
+            ...manipulatedImage,
+            fileName: asset.fileName,
+            mimeType: asset.mimeType
+        };
     } else {
         return null;
     }

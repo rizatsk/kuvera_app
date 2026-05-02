@@ -143,7 +143,7 @@ function CardStockIdx({ code, nameCompany, price, logoId, change, dividen, analy
     }
 
     return (
-        <TouchableOpacity 
+        <TouchableOpacity
             onPress={() => detailButtonHandler(code)}
             activeOpacity={0.6}
             style={styles.dataTransactionContainer} >
@@ -157,11 +157,13 @@ function CardStockIdx({ code, nameCompany, price, logoId, change, dividen, analy
                             contentFit="fill" />
                         <View>
                             <CustomText style={{ fontSize: 16, fontWeight: 600 }}>{code}</CustomText>
-                            <CustomText style={{ fontSize: 12 }}>{nameCompany}</CustomText>
+                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', width: 180 }}>
+                                <CustomText style={{ fontSize: 12 }} >{nameCompany}</CustomText>
+                            </View>
                         </View>
                     </View>
-                    <View style={{alignItems: 'flex-end'}}>
-                        <CustomText style={{fontSize: 12}}>Analyst</CustomText>
+                    <View style={{ alignItems: 'flex-end' }}>
+                        <CustomText style={{ fontSize: 12 }}>Analyst</CustomText>
                         <CustomText style={{
                             fontSize: 13,
                             fontWeight: 600,
