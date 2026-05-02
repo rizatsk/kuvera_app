@@ -15,11 +15,9 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
         value,
         label,
         errorMessage,
-        helperMessage,
-        isError,
         selectOptions,
         onSelect,
-        ...rest
+        testID,
     } = props;
 
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -47,6 +45,7 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
 
     return (
         <InputFieldKuvera
+            testID={testID}
             value={capitalize(value || '')}
             label={label}
             computedStyle={computedStyle}
@@ -55,6 +54,7 @@ const RadioInput: React.FunctionComponent<RadioInputProps> = (props) => {
             handleOnFocus={handleOnFocus}
         >
             <ModalKuvera
+                testID={`modal-${testID}`}
                 title={label}
                 isModalVisible={isModalVisible}
                 setFocused={setFocused}

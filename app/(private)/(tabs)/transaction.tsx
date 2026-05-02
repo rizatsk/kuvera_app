@@ -16,6 +16,7 @@ export default function TransactionScreen() {
     end: moment().format('YYYY-MM-DD') + ' 23:59:59', 
     keyString: '30lastday' 
   })
+  
   const onSelectDate = (dataDateTrx: DateTrx) => {
     setDateTrx(dataDateTrx);
   };

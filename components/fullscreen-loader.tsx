@@ -57,6 +57,7 @@ const FullScreenLoader: React.FC = () => {
 
     return (
         <Modal
+            testID='modal-full-screen-loading'
             transparent={true}
             animationType="fade"
             visible={visibleLoading}

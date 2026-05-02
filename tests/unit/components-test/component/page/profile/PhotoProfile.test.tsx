@@ -21,17 +21,11 @@ const authUserReducer = (
     email: "john@example.com",
     photo_profile_url: "https://example.com/photo.jpg",
   },
-  action: any,
 ) => {
-  switch (action.type) {
-    case "authUser/asyncUpdateProfileUser/fulfilled":
-      return { ...state, photo_profile_url: action.payload.photo_profile_url };
-    default:
-      return state;
-  }
+  return state;
 };
 
-// Mock async thunk action
+// Mock async action redux action
 jest.mock("@/states/auth-user/action", () => {
   return {
     asyncUpdateProfileUser: jest.fn((payload) => ({

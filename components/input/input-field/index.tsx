@@ -38,6 +38,7 @@ export default function InputFieldKuvera({
     handleOnchangeText,
     counter = 0,
     inputType = 'text',
+    testID,
     ...rest
 }: InputFieldProps) {
     const [labelWidth, setLabelWidth] = useState(0);
@@ -104,6 +105,7 @@ export default function InputFieldKuvera({
                 {isInput ? (
                     <View style={computedStyle.inputWrapper}>
                         <MaskInput
+                            testID={testID}
                             value={computedValue}
                             style={[computedStyle.textField]}
                             onFocus={handleOnFocus}
@@ -123,7 +125,7 @@ export default function InputFieldKuvera({
                         )}
                     </View>
                 ) : (
-                    <Pressable onPress={() => handleOnFocus()} style={computedStyle.inputWrapper} >
+                    <Pressable testID={testID} onPress={() => handleOnFocus()} style={computedStyle.inputWrapper} >
                         <CustomText style={computedStyle.textField}>{computedValue}</CustomText>
                     </Pressable>
                 )}
