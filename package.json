@@ -5,6 +5,7 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
+    "android:dev": "NODE_ENV=development expo run:android",
     "android": "expo run:android",
     "build:android:prod": "eas build --profile production --platform android --local",
     "eas:build:android:prod": "eas build --profile production --platform android",

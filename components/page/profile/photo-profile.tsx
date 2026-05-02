@@ -41,6 +41,7 @@ export default function PhotoProfile() {
         }
 
         if (resultImage) {
+            console.log('Result image', resultImage);    
             dispatch(
                 asyncUpdateProfileUser({
                     param: {
