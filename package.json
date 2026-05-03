@@ -1,6 +1,6 @@
 {
-  "name": "ms-service",
-  "version": "1.4.0",
+  "name": "ms-service-kuvera",
+  "version": "1.4.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -18,9 +18,9 @@
   "author": "Rizat",
   "license": "ISC",
   "dependencies": {
-    "@apollo/server": "^5.1.0",
+    "@apollo/server": "^5.5.0",
     "@as-integrations/express5": "^1.1.2",
-    "axios": "^1.13.2",
+    "axios": "^1.15.1",
     "cheerio": "^1.1.2",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
@@ -33,9 +33,9 @@
     "pg": "^8.16.3",
     "pg-hstore": "^2.3.4",
     "pino": "^10.1.0",
-    "sequelize": "^6.37.7",
+    "sequelize": "^6.37.8",
     "sequelize-typescript": "^2.1.6",
-    "uuid": "^13.0.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.35",
@@ -51,6 +51,7 @@
   },
   "resolutions": {
     "jws": "~3.2.3",
-    "body-parser": "~2.2.1"
+    "body-parser": "~2.2.1",
+    "uuid": "~14.0.0"
   }
 }
