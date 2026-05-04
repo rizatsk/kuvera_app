@@ -52,6 +52,7 @@ describe("PhotoProfile Component", () => {
     // Mock getPendingResultAsync
     (ImagePicker.getPendingResultAsync as jest.Mock).mockResolvedValue(null);
   });
+  
   it("should render component correctly with user data", () => {
     // Act
     const { getByText } = render(
