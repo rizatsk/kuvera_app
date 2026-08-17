@@ -1,0 +1,9 @@
+{
+  "name": "kuvera",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:api": "turbo dev --filter=@kuvera/back-end",
+    "dev:mobile": "turbo dev --filter=@kuvera/mobile"
+  }
+}
