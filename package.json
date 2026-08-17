@@ -1,9 +1,19 @@
 {
   "name": "kuvera",
   "private": true,
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "turbo dev",
     "dev:api": "turbo dev --filter=@kuvera/back-end",
-    "dev:mobile": "turbo dev --filter=@kuvera/mobile"
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.2",
+    "@commitlint/config-conventional": "^21.2.2",
+    "husky": "^9.1.7",
+    "turbo": "^2.10.10"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "kuvera-app",
+  "name": "@kuvera/mobile",
   "main": "expo-router/entry",
   "version": "1.4.1",
   "scripts": {

@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { Animated, Dimensions, Modal, TouchableOpacity, View } from 'react-native';
 import CustomText from '../custom-text';
 import { modalStyles } from './style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Animasi for Modal
 const { height } = Dimensions.get('window');
@@ -79,8 +80,9 @@ export default function ModalKuvera({
                             <Ionicons name="close" size={24} color="#333" />
                         </TouchableOpacity>
                     </View>
-
-                    {children}
+                    <SafeAreaView>
+                        {children}
+                    </SafeAreaView>
                 </Animated.View>
             </TouchableOpacity>
         </Modal>
