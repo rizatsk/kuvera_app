@@ -1,7 +1,7 @@
-import { v7 } from "uuid"
+import { v4 } from "uuid";
 
 const uuidGen = ():string => {
-    return v7();
+    return v4();
 }
 
 export default uuidGen;
