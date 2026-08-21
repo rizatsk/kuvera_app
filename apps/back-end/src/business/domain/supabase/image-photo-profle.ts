@@ -1,6 +1,7 @@
 import logger from "../../../config/logger";
 import supabaseClient from "../../../config/supabase";
 import Environment from "../../../helper/constan/environment";
+import { generateUrlPhotoProfile } from "../../../helper/generate-url";
 import { UploadImageResponse } from "./type";
 
 export async function uploadImage(
@@ -25,6 +26,6 @@ export async function uploadImage(
 
   return {
     status: 'success',
-    path: `${Environment.SUPABASE_URL}${Environment.SUPABASE_BUCKET_PUBLIC_PATH}/${Environment.SUPABASE_BUCKET_NAME}${filePath}`
+    path: generateUrlPhotoProfile(filePath)
   };
 }

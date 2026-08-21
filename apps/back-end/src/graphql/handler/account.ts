@@ -2,6 +2,7 @@ import { Request } from "express";
 import { validateSessionAuthTokenGraphQl } from "../../business/domain/auth";
 import { getDataAccountGraphQl } from "../../business/repositories/account";
 import Environment from "../../helper/constan/environment";
+import { generateUrlPhotoProfile } from "../../helper/generate-url";
 
 async function HandlerAccountGraphQl(req: Request) {
   const auth = req.headers.authorization;
@@ -18,7 +19,7 @@ async function HandlerAccountGraphQl(req: Request) {
 
   return {
     ...account,
-    photo_profile_url: account.photo_profile_url?.includes('https') ? account.photo_profile_url : `${Environment.BASE_URL}${account.photo_profile_url}`
+    photo_profile_url: account.photo_profile_url ? generateUrlPhotoProfile(account.photo_profile_url) : null
   }
 }
 
