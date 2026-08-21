@@ -12,6 +12,8 @@ const Environment = {
 
     REDIS_HOST: process.env.REDIS_HOST || 'localhost',
     REDIS_PORT: process.env.REDIS_PORT || 6379,
+    REDIS_USERNAME: process.env.REDIS_USERNAME,
+    REDIS_PASSWORD: process.env.REDIS_PASSWORD,
 
     URL_AUTH_GOOGLE: process.env.URL_AUTH_GOOGLE || 'https://google',
 

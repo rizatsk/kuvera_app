@@ -5,6 +5,8 @@ import Environment from "../helper/constan/environment";
 const clientRedis = new Redis({
     port: Environment.REDIS_PORT as number,
     host: Environment.REDIS_HOST,
+    username: Environment.REDIS_USERNAME,
+    password: Environment.REDIS_PASSWORD,
 });
 
 export async function redisSet(key: string, value: string, ttl = 60) {
