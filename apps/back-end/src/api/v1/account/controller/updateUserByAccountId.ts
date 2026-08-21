@@ -16,6 +16,14 @@ export default async function ControllerUpdateUserByAccountId(req: RequestVerify
             photo_profile
         });
 
+        logger.debug({
+            message: 'update photo profile',
+            data: {
+                update_name,
+                photo_profile_url
+            }
+        })
+
         return res.status(200).json({
             message: 'success',
             data: {

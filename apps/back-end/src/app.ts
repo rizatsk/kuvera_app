@@ -34,10 +34,8 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
 // Static Public Folder
 app.use("/public", express.static(path.resolve(__dirname, "../public")));
 
-// 2. Load REST API Routes
 loadRoutes(app);
 
-// 3. Inisialisasi Async (GraphQL & DB) untuk Serverless / Vercel
 let isInitialized = false;
 
 async function initializeApp() {
@@ -80,5 +78,4 @@ initializeApp().then(() => {
   });
 });
 
-// 5. Export Express App untuk Vercel Serverless Function
 export default app;

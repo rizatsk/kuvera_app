@@ -1,37 +1,31 @@
-import * as fs from 'fs';
+import path from 'path';
 import logger from '../../../config/logger';
-import { getDataAccountGraphQl } from '../../repositories/account';
+import { uploadImage } from '../supabase/image-photo-profle';
+import { UploadPhotoProfileResponse } from './type';
 
-export function uploadPhotoProfile(photo_profile: Express.Multer.File): string {
+export async function uploadPhotoProfile(photo_profile: Express.Multer.File, account_id: string): Promise<UploadPhotoProfileResponse> {
     try {
-        const saveFolder = `./public/images/photo_profiles`;
-        if (!fs.existsSync(saveFolder)) {
-            fs.mkdirSync(saveFolder, { recursive: true });
-        }
+        const saveFolder = `/images/photo_profiles`;
+        // if (!fs.existsSync(saveFolder)) {
+        //     fs.mkdirSync(saveFolder, { recursive: true });
+        // }
 
-        const pathFile = `${saveFolder}/${Date.now()}_${photo_profile.originalname}`;
+        const pathFileName = path.extname(photo_profile.originalname);
+        const pathFile = `${saveFolder}/${account_id}${pathFileName}`;
 
-        fs.writeFileSync(`${pathFile}`, photo_profile.buffer);
+        // fs.writeFileSync(`${pathFile}`, photo_profile.buffer);
+        const response = await uploadImage({
+            fileBuffer: photo_profile.buffer,
+            filePath: pathFile,
+            mimeType: photo_profile.mimetype
+        })
 
-        return pathFile.replace('./public', '/public');
+        return {
+            pathFile,
+            urlImage: response.path
+        };
     } catch (error) {
         logger.error({ message: 'Error save or delete file', error });
         throw error;
     };
 };
-
-export async function handlePhotoProfileExisting(account_id: string) {
-    try {
-        const account = await getDataAccountGraphQl(account_id);
-
-        if (account.photo_profile_url) {
-            const existingFilePath = `.${account.photo_profile_url}`;
-            if (fs.existsSync(existingFilePath)) {
-                fs.unlinkSync(existingFilePath);
-            }
-        };
-    } catch (error) {
-        logger.error({ message: 'Error handlePhotoProfileExisting', error });
-        throw error;
-    }
-}

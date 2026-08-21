@@ -1,5 +1,5 @@
 import Environment from "../../../helper/constan/environment";
-import { handlePhotoProfileExisting, uploadPhotoProfile } from "../../domain/account/photo-profile";
+import { uploadPhotoProfile } from "../../domain/account/photo-profile";
 import { updateUserByAccountId } from "../../repositories/account";
 import { UsecaseUpdateUserByAccountIdParam } from "./type";
 
@@ -8,24 +8,24 @@ const usecaseUpdateUserByAccountId = async ({
     name = null,
     photo_profile
 }: UsecaseUpdateUserByAccountIdParam) => {
-    let photo_profile_url: string | null = null;
-    if (photo_profile) {
-        // delete existing photo profile if any
-        await handlePhotoProfileExisting(account_id);
+    let photo_profile_path: string | null = null,
+        photo_profile_url: string | null = null;
 
-        // upload new photo profile
-        photo_profile_url = uploadPhotoProfile(photo_profile);
+    if (photo_profile) {
+        const {pathFile, urlImage} = await uploadPhotoProfile(photo_profile, account_id);
+        photo_profile_path = pathFile;
+        photo_profile_url = urlImage;
     }
 
     await updateUserByAccountId({
         account_id,
         name,
-        photo_profile_url: photo_profile_url
+        photo_profile_path: photo_profile_path
     });
 
     return {
         update_name: name,
-        photo_profile_url: `${Environment.BASE_URL}${photo_profile_url}`
+        photo_profile_url,
     }
 };
 

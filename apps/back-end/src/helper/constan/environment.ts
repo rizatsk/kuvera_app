@@ -30,6 +30,11 @@ const Environment = {
     SECRET_TOKEN_JWT: process.env.SECRET_TOKEN_JWT || '',
     PRIVATE_KEY_JWT: process.env.PRIVATE_KEY_JWT || '',
     PUBLIC_KEY_JWT: process.env.PUBLIC_KEY_JWT || '',
+
+    SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || '',
+    SUPABASE_BUCKET_NAME: process.env.SUPABASE_BUCKET_NAME || '',
+    SUPABASE_BUCKET_PUBLIC_PATH: process.env.SUPABASE_BUCKET_PUBLIC_PATH || '',
 }
 
 export default Environment;

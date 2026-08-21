@@ -87,7 +87,7 @@ export type ChangeNameCategorySpendParam = {
 export type UpdateUserByAccountIdParam = {
     account_id: string
     name?: string | null
-    photo_profile_url?: string | null
+    photo_profile_path?: string | null
 }
 
 export type AccountType = {

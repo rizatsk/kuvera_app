@@ -58,7 +58,7 @@ export async function getDataAccountGraphQl(account_id: string): Promise<Account
 export async function updateUserByAccountId({
     account_id,
     name = null,
-    photo_profile_url
+    photo_profile_path
 }: UpdateUserByAccountIdParam) {
     let update_data: Record<string, any> = {
         updated_dt: new Date()
@@ -68,8 +68,8 @@ export async function updateUserByAccountId({
         update_data = { ...update_data, name };
     }
 
-    if (photo_profile_url) {
-        update_data = { ...update_data, photo_profile_url };
+    if (photo_profile_path) {
+        update_data = { ...update_data, photo_profile_url: photo_profile_path };
     }
 
     await User.update(
