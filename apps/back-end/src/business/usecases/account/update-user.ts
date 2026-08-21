@@ -1,4 +1,5 @@
-import Environment from "../../../helper/constan/environment";
+
+import logger from "../../../config/logger";
 import { uploadPhotoProfile } from "../../domain/account/photo-profile";
 import { updateUserByAccountId } from "../../repositories/account";
 import { UsecaseUpdateUserByAccountIdParam } from "./type";
