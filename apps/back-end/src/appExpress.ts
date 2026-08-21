@@ -2,11 +2,11 @@ import express, { NextFunction, Request, Response } from 'express';
 import loadRoutes from './routes';
 import path from 'path';
 
-const app = express();
+const appExpress = express();
 
 // Middleware untuk mengurai body JSON dari request
-app.use(express.json());
-app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
+appExpress.use(express.json());
+appExpress.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof SyntaxError && (err as any).status === 400 && "body" in err) {
     return res.status(400).json({
       status: "error",
@@ -17,8 +17,8 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Headers', 'X-Requested-With');
   next();
 });
-app.use("/public", express.static(path.resolve(__dirname, "../public")));
+appExpress.use("/public", express.static(path.resolve(__dirname, "../public")));
 
-loadRoutes(app);
+loadRoutes(appExpress);
 
-export default app;
+export default appExpress;

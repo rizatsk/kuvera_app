@@ -2,7 +2,7 @@
 import 'reflect-metadata';
 
 import dotenv from 'dotenv';
-import app from "./app";
+import app from "./appExpress";
 import { sequelize } from './config/database_pg';
 import logger from './config/logger';
 import serverGraphql from './graphql';
@@ -42,3 +42,5 @@ app.listen(PORT, async () => {
 
   logger.info(`Server is running at PORT: ${PORT}`);
 });
+
+export default app;
