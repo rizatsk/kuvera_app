@@ -21,6 +21,7 @@ export async function getAccountGraphQl(): Promise<GetAccountGraphQlResponse> {
 
         return result.data.account;
     } catch (error: any) {
+        console.log('masuk sini pak eko', error);
         const response = error.response?.data;
 
         throw {
