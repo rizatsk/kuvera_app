@@ -2,25 +2,25 @@
 import 'reflect-metadata';
 
 import dotenv from 'dotenv';
+import express, { NextFunction, Request, Response } from 'express';
+import cors from 'cors';
+import path from 'path';
+import { expressMiddleware } from '@as-integrations/express5';
+
 import { sequelize } from './config/database_pg';
 import logger from './config/logger';
 import serverGraphql from './graphql';
-import cors from 'cors';
-import { expressMiddleware } from '@as-integrations/express5';
+import loadRoutes from './routes';
 
-// Muat variabel lingkungan dari file .env
 dotenv.config();
 
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-import express, { NextFunction, Request, Response } from 'express';
-import loadRoutes from './routes';
-import path from 'path';
-
-const app = express();
-
-// Middleware untuk mengurai body JSON dari request
+// 1. Core Middlewares
 app.use(express.json());
+
+// Handle Error JSON Invalid
 app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof SyntaxError && (err as any).status === 400 && "body" in err) {
     return res.status(400).json({
@@ -28,40 +28,64 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
       message: "Invalid JSON payload",
     });
   }
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-  next();
+  next(err);
 });
+
+// Static Public Folder
 app.use("/public", express.static(path.resolve(__dirname, "../public")));
 
+// 2. Load REST API Routes
 loadRoutes(app);
 
-// Mulai server
-app.listen(PORT, async () => {
-  // Run Graphql
+// 3. Inisialisasi Async (GraphQL & DB) untuk Serverless / Vercel
+let isInitialized = false;
+
+async function initializeApp() {
+  if (isInitialized) return;
+
+  // Start GraphQL Server
   await serverGraphql.start();
+
   app.use(
     '/graphql',
     cors(),
     express.json(),
     expressMiddleware(serverGraphql, {
       context: async ({ req }) => ({ req }),
-    }),
+    })
   );
 
+  // 404 Route Handler
   app.use((req, res) => {
     res.status(404).json({
       status: 'error',
-      message: `Route Not Found`,
+      message: 'Route Not Found',
     });
   });
 
-  // connect db
-  sequelize.sync({ alter: false,  force: false })
-    .then(() => logger.info("Database connected & synced!"))
-    .catch((err) => logger.error({ message: "Database error", error: err }));
+  // Database Connection
+  try {
+    await sequelize.sync({ alter: false, force: false });
+    logger.info("Database connected & synced!");
+  } catch (err) {
+    logger.error({ message: "Database error", error: err });
+  }
 
-  logger.info(`Server is running at PORT: ${PORT}`);
+  isInitialized = true;
+}
+
+// Wrapper Middleware untuk Vercel (Memastikan setup selesai sebelum request diproses)
+app.use(async (req, res, next) => {
+  await initializeApp();
+  next();
 });
 
+// 4. Jalankan app.listen HANYA di Environment Lokal
+initializeApp().then(() => {
+  app.listen(PORT, () => {
+    logger.info(`Server is running locally at PORT: ${PORT}`);
+  });
+});
+
+// 5. Export Express App untuk Vercel Serverless Function
 export default app;
