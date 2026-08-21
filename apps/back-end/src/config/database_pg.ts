@@ -6,9 +6,11 @@ import { User } from "../models/user";
 import { SessionAuth } from "../models/session_auth";
 import { Transaction } from "../models/transaction";
 import { CategorySpend } from "../models/category_spend";
+import pg from 'pg';
 
 export const sequelize = new Sequelize({
     dialect: "postgres",
+    dialectModule: pg,
     host: Environment.DB_PG_HOST,
     port: Environment.DB_PG_PORT as number,
     username: Environment.DB_PG_USERNAME,
