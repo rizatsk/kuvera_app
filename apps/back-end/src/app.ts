@@ -74,13 +74,6 @@ async function initializeApp() {
   isInitialized = true;
 }
 
-// Wrapper Middleware untuk Vercel (Memastikan setup selesai sebelum request diproses)
-app.use(async (req, res, next) => {
-  await initializeApp();
-  next();
-});
-
-// 4. Jalankan app.listen HANYA di Environment Lokal
 initializeApp().then(() => {
   app.listen(PORT, () => {
     logger.info(`Server is running locally at PORT: ${PORT}`);
