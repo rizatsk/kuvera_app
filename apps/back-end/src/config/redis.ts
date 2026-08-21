@@ -3,7 +3,7 @@ import Redis from "ioredis";
 import Environment from "../helper/constan/environment";
 
 const clientRedis = new Redis({
-    port: Environment.REDIS_PORT as number,
+    port: Number(Environment.REDIS_PORT),
     host: Environment.REDIS_HOST,
     username: Environment.REDIS_USERNAME,
     password: Environment.REDIS_PASSWORD,
