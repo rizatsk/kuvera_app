@@ -1,4 +1,4 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -8,6 +8,11 @@ import FullScreenLoader from '@/components/fullscreen-loader';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useEffect } from 'react';
 import ReduxProvider from './provider';
+
+import {
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -22,6 +27,8 @@ export default function RootLayout() {
     'Nunito-Black': require('@/assets/fonts/nunito/Nunito-Black.ttf'),
   });
 
+  const queryClient = new QueryClient()
+
   useEffect(() => {
     if (loaded || error) {
       SplashScreen.hideAsync();
@@ -32,17 +39,20 @@ export default function RootLayout() {
     return null;
   }
 
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <ReduxProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(non-private)" />
-          <Stack.Screen name="(private)" />
-          <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-        </Stack>
-        <FullScreenLoader />
-      </ReduxProvider>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider value={DefaultTheme}>
+        <ReduxProvider>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(non-private)" />
+            <Stack.Screen name="(private)" />
+            <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+          </Stack>
+          <FullScreenLoader />
+        </ReduxProvider>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

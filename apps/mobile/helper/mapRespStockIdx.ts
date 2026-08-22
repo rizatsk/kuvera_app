@@ -17,7 +17,10 @@ type ListStockIdxProps = {
     exchange: string
     kind: string
     "kind-delay": number
-    logoid: string
+    logo: {
+        logoid: string;
+        style: string;
+    }
     name: string
     type: string
     typespecs: Array<string>
@@ -57,7 +60,7 @@ const mapDataStockIdx = (respStockIdx: respStockIdxProps): DataStocksProps[] => 
         const stock: Record<string, any> = {
             stockCode: newList.name,
             stockName: newList.description,
-            logoId: newList.logoid,
+            logoId: newList?.logo?.logoid || '',
         }
 
         stock.price = listPrices[index]
