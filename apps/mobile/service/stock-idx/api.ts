@@ -1,7 +1,7 @@
 import environment from '@/constants/environment';
 import mapDataStockIdx, { respStockIdxProps } from '@/helper/mapRespStockIdx';
-import { DataStocksProps } from '@/states/stock-idx/type';
 import axios from 'axios';
+import { DataStocksProps } from './type';
 
 export async function ApiStockIdx(): Promise<DataStocksProps[]> {
     try {
@@ -9,7 +9,7 @@ export async function ApiStockIdx(): Promise<DataStocksProps[]> {
             method: 'POST',
             url: environment.STOCK_IDX_API_URL,
             data: {
-                "lang": "id_ID",
+                "lang": "id_IDs",
                 "range": [0, 999]
             },
             headers: {

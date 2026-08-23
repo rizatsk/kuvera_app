@@ -4,7 +4,7 @@ import { ActionReducer } from "../action";
 import { setLoading } from "../visible-loading/action";
 import { AsyncAddTransactionParam, AsyncDeleteTransactionParam, AsyncGetTransactionByCategoryParam, AsyncGetTransactionsByCategoryParam, AsyncGetTransactionsParam, AsyncUpdateTransactionParam } from "./type";
 
-function setSumerizeTransactionByCategory(isLoading: boolean, data: TransactionGroupByCategoryType[]) {
+export function setSumerizeTransactionByCategory(isLoading: boolean, data: TransactionGroupByCategoryType[]) {
     return {
         type: ActionReducer.SET_SUM_TRANSACTION_BY_CATEGORY,
         payload: {

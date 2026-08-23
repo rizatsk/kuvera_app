@@ -2,6 +2,7 @@ import CustomText from '@/components/custom-text';
 import { modalStyles } from '@/components/input/radio-input/style';
 import ModalKuvera from '@/components/modal-bottom';
 import { Colors } from '@/constants/theme';
+import { useAppSelector } from '@/states';
 import { Feather } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
@@ -9,6 +10,7 @@ import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export default function NoHaveTransaction() {
+    const isLogin = useAppSelector((states) => states.isLogin);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const selectOptions = [
         { key: 'Income', value: 'incoming' },
@@ -16,10 +18,17 @@ export default function NoHaveTransaction() {
     ];
 
     function handleSubmit(option: { key: string, value: string }) {
-        if (option.value === 'incoming') {
-            router.push({ pathname: '/(private)/add-transaction/form-add-income' })
+        if (!isLogin) {
+            router.navigate({
+                pathname: '/(page)/login',
+                params: {
+                    backToHome: 'false'
+                }
+            });
+        } else if (option.value === 'incoming') {
+            router.push({ pathname: '/(page)/add-transaction/form-add-income' })
         } else {
-            router.push({ pathname: '/(private)/add-transaction/form-add-spending' })
+            router.push({ pathname: '/(page)/add-transaction/form-add-spending' })
         }
         setIsModalVisible(false);
     }

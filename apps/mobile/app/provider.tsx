@@ -1,5 +1,5 @@
 import { store } from "@/states";
-import { asyncPreloadProcess } from "@/states/preload/action";
+import { asyncPreloadProcess } from "@/states/is-login/action";
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 

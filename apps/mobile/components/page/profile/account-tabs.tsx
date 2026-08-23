@@ -8,7 +8,7 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native'
 export default function AccountTabsCard() {
     const handleEditProfile = () => {
         router.push({
-            pathname: '/(private)/update-profile',
+            pathname: '/(page)/update-profile',
         })
     }
 

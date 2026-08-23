@@ -1,5 +1,5 @@
 export const ActionReducer = {
-    SET_PRELOAD: "SET_PRELOAD",
+    SET_IS_LOGIN: "SET_IS_LOGIN",
 
     SET_AUTH: "SET_AUTH",
     UNSET_AUTH: "UNSET_AUTH",
@@ -19,7 +19,7 @@ export const ActionReducer = {
 };
 
 export enum ActionReducerType  {
-    SET_PRELOAD = "SET_PRELOAD",
+    SET_IS_LOGIN = "SET_IS_LOGIN",
 
     SET_AUTH = "SET_AUTH",
     UNSET_AUTH = "UNSET_AUTH",

@@ -50,7 +50,7 @@ export default function CardTransaction(param: CardTransactionParam) {
 
     const handleButton = () => {
         router.push({
-            pathname: '/(private)/detail-transaction',
+            pathname: '/(page)/detail-transaction',
             params: {
                 id: param.id,
                 category_id: param.category_id,

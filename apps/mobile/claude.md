@@ -54,7 +54,7 @@ kuvera-app/
 │   │   ├── login/
 │   │   │   └── index.tsx
 │   │   └── _layout.tsx
-│   ├── (private)/                    # Groping pages use private/have access-token
+│   ├── (page)/                    # Groping pages use private/have access-token
 │   │   ├── (tabs)/
 │   │   ├── add-transaction/
 │   │   ├── category/

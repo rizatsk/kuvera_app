@@ -3,11 +3,11 @@ import { ActionReducer } from "../action";
 import { setAuthUserActionCreator } from "../auth-user/action";
 import { setLoading } from "../visible-loading/action";
 
-export function setPreloadAction(preload: boolean) {
+export function setIsLoginAction(isLogin: boolean) {
     return {
-        type: ActionReducer.SET_PRELOAD,
+        type: ActionReducer.SET_IS_LOGIN,
         payload: {
-            preload
+            isLogin
         }
     }
 }
@@ -16,15 +16,14 @@ export function asyncPreloadProcess() {
     return async (dispatch: any) => {
         try {
             dispatch(setLoading(true))
-            dispatch(setPreloadAction(true));
-
+            
             // Get data account
             const user = await getAccountGraphQl();
+            dispatch(setIsLoginAction(true));
             dispatch(setAuthUserActionCreator(user))
         } catch (error) {
             console.log("Error async preload process", error)
         } finally {
-            dispatch(setPreloadAction(false))
             dispatch(setLoading(false))
         }
     }

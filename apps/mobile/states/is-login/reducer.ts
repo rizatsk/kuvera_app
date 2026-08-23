@@ -1,20 +1,19 @@
 import { ActionReducer, ActionReducerType } from "../action";
 
-
 interface Action {
   type: ActionReducerType;
   payload: {
-    preload: boolean;
+    isLogin: boolean;
   };
 }
 
-function isPreloadReducer(initial = true, action = {} as Action) {
+function isLoginReducer(initial = false, action = {} as Action) {
   switch (action.type) {
-    case ActionReducer.SET_PRELOAD:
-      return action.payload.preload;
+    case ActionReducer.SET_IS_LOGIN:
+      return action.payload.isLogin;
     default:
       return initial;
   }
 }
 
-export default isPreloadReducer;
+export default isLoginReducer;

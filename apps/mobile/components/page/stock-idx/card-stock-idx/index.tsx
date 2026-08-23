@@ -1,16 +1,16 @@
 import CustomText from '@/components/custom-text';
 import { Colors } from '@/constants/theme';
 import closeOrBidIHSG from '@/helper/closeOrBidIHSG';
-import { asyncGetStockIDXPrice } from '@/states/stock-idx/action';
-import { DataStocksProps } from '@/states/stock-idx/type';
+import { ApiStockIdx } from '@/service/stock-idx/api';
 import { Entypo } from '@expo/vector-icons';
+import { useMutation } from '@tanstack/react-query';
 import { Image } from 'expo-image';
 import { router, useFocusEffect } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useDispatch } from 'react-redux';
 import IsNotFoundStockIDX from './is-not-found';
 import SkeletonStockIDX from './skeleton';
+import { DataStocksProps } from '@/service/stock-idx/type';
 
 type CardStockIdxProps = {
     code: string
@@ -27,22 +27,36 @@ type ListCardStockIdxProps = {
 }
 
 export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
-    const dispatch = useDispatch();
     const [dataStockIDX, setDataStockIDX] = useState<DataStocksProps[]>([]);
     const [dataStockIDXSearch, setDataStockIDXSearch] = useState<DataStocksProps[]>([]);
     const [skeletonLoading, setSkeletonLoading] = useState(true)
-    const [refresh, setRefresh] = useState(false);
     const API_FETCH_INTERVAL = 60000;
+
+    const {
+        mutate: sendMessageMutation,
+        isPending
+    } = useMutation({
+        mutationFn: async () => {
+            console.log('masuk pak eko');
+            const res = await ApiStockIdx();
+            return res;
+        },
+        onSettled: (data, error, variables, context) => {
+            if (error) console.error("Error get ApiStockIdx", error);
+            if (data) setDataStockIDX(data); 
+            setSkeletonLoading(false);
+        },
+    });
 
     useFocusEffect(
         useCallback(() => {
             // 1. Panggil data segera saat layar fokus
-            getDataStockIDX();
+            sendMessageMutation();
 
             // 2. Set up interval untuk periodic hit API
             const intervalId = setInterval(() => {
                 const bidOrClose = closeOrBidIHSG();
-                if (bidOrClose === 'Bid') getDataStockIDXPeriod();
+                if (bidOrClose === 'Bid') sendMessageMutation();
             }, API_FETCH_INTERVAL);
 
             // 3. Cleanup function: bersihkan interval saat layar BLUR (tidak fokus)
@@ -73,35 +87,9 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
         }
     }, [keyword, dataStockIDX])
 
-    const fetchRefreshing = () => {
-        setRefresh(true)
-        getDataStockIDX()
-        setRefresh(false)
-    }
-
-    function getDataStockIDX() {
-        dispatch(
-            asyncGetStockIDXPrice({
-                setDataStockIDX,
-                setDataStockIDXSearch,
-                setSkeletonLoading
-            }) as any
-        )
-    }
-
-    function getDataStockIDXPeriod() {
-        dispatch(
-            asyncGetStockIDXPrice({
-                setDataStockIDX,
-                setDataStockIDXSearch,
-                setSkeletonLoading: () => { }
-            }) as any
-        )
-    }
-
     return (
         <FlatList<DataStocksProps | undefined>
-            refreshControl={<RefreshControl refreshing={refresh} onRefresh={fetchRefreshing} />}
+            refreshControl={<RefreshControl refreshing={isPending} onRefresh={sendMessageMutation} />}
             scrollEnabled={true}
             data={skeletonLoading ? Array.from({ length: 13 }) : dataStockIDXSearch}
             keyExtractor={(item, index) =>
@@ -135,7 +123,7 @@ function CardStockIdx({ code, nameCompany, price, logoId, change, dividen, analy
 
     const detailButtonHandler = (stockCode: string) => {
         router.push({
-            pathname: '/(private)/stock-idx/detail',
+            pathname: '/(page)/stock-idx/detail',
             params: {
                 stockCode
             }

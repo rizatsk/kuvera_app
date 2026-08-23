@@ -24,13 +24,13 @@ export default function HomeScreen() {
 
   const handleAllCategory = () => {
     router.push({
-      pathname: '/(private)/category/all-category'
+      pathname: '/(page)/category/all-category'
     })
   };
 
   const handleAllPriceGold = () => {
     router.push({
-      pathname: '/(private)/price-gold'
+      pathname: '/(page)/price-gold'
     })
   }
 
@@ -39,6 +39,7 @@ export default function HomeScreen() {
       edges={['top']}
       style={{
         flex: 1,
+        backgroundColor: "#fffff"
       }}
     >
       <HeaderHome />

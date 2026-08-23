@@ -36,7 +36,7 @@ export default function ButtonDisableOrEnableCategory({ id_category, status, cat
                     setIsModalVisible(false);
                     router.dismiss()
                     router.replace({
-                        pathname: '/(private)/category/all-category'
+                        pathname: '/(page)/category/all-category'
                     });
                 }
             }) as any

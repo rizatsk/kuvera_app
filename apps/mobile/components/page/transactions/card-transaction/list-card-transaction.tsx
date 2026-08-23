@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import CardTransaction from './card-transaction';
 import NoHaveTransaction from './no-have-transaction';
 import SkeletonCardTransaction from './skeleton';
+import { useAppSelector } from '@/states';
 
 type ListCardTransactionsParam = {
   type: TypeTransaction
@@ -21,6 +22,7 @@ type ListCardTransactionsParam = {
 export default function ListCardTransactions(param: ListCardTransactionsParam) {
   const dispatch = useDispatch();
 
+  const isLogin = useAppSelector((states) => states.isLogin);
   const [totalSaldo, setTotalSaldo] = useState({
     in: 0,
     out: 0
@@ -30,7 +32,7 @@ export default function ListCardTransactions(param: ListCardTransactionsParam) {
 
   useEffect(() => {
     getRecentTransactions()
-  }, [param.type, param.start_date])
+  }, [param.type, param.start_date, isLogin])
 
   useEffect(() => {
     if (listRecentTransactions.length > 0) {
@@ -48,19 +50,23 @@ export default function ListCardTransactions(param: ListCardTransactionsParam) {
   }, [listRecentTransactions])
 
   function getRecentTransactions() {
-    dispatch(
-      asyncGetTransactions({
-        param: {
-          type: param.type,
-          start_date: param.start_date,
-          end_date: param.end_date,
-        },
-        setIsLoading,
-        successHandler: (result) => {
-          setListRecentTransactions(result);
-        }
-      }) as any
-    );
+    if (isLogin) {
+      dispatch(
+        asyncGetTransactions({
+          param: {
+            type: param.type,
+            start_date: param.start_date,
+            end_date: param.end_date,
+          },
+          setIsLoading,
+          successHandler: (result) => {
+            setListRecentTransactions(result);
+          }
+        }) as any
+      );
+    } else {
+      setListRecentTransactions([])
+    }
   };
 
   return (

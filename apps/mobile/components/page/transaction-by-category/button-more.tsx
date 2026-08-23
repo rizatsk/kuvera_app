@@ -21,7 +21,7 @@ export default function ButtonMore({id_category, status, category_name, total_sp
   const handleButton = () => {
     setIsModalVisible(false);
     router.push({
-      pathname: '/(private)/category/edit-category',
+      pathname: '/(page)/category/edit-category',
       params: {
         category_id: id_category,
         category_name: category_name,

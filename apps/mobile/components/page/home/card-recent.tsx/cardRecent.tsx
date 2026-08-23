@@ -41,7 +41,7 @@ export default function CardRecent({
 
     const handleButton = () => {
         router.push({
-            pathname: '/(private)/detail-transaction',
+            pathname: '/(page)/detail-transaction',
             params: {
                 id: id,
                 category_id: category_id,

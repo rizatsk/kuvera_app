@@ -9,6 +9,7 @@ import {
 import { ActionReducer } from "../action";
 import { setLoading } from "../visible-loading/action";
 import { AsyncUpdateProfileUserParam, AuthUserType } from "./type";
+import { setIsLoginAction } from "../is-login/action";
 
 export function setAuthUserActionCreator(user: AuthUserType) {
     return {
@@ -64,6 +65,7 @@ export function asyncSignInWithGoogle() {
                 // Get data account
                 const user = await getAccountGraphQl();
 
+                dispatch(setIsLoginAction(true));
                 dispatch(setAuthUserActionCreator(user))
             } else {
                 console.log("Google sign in cancel by user")
@@ -91,6 +93,7 @@ export function asyncUnsetAuth() {
             // Delete token in save local storage expo
             await putAccessRefreshToken('', '')
 
+            dispatch(setIsLoginAction(false));
             dispatch(unsetAuthUserActionCreator())
         } catch (error) {
             console.log("Error unset auth", error)

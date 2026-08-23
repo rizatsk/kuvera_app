@@ -1,31 +1,29 @@
-import CustomText from '@/components/custom-text'
-import { Colors } from '@/constants/theme'
-import Feather from '@expo/vector-icons/Feather'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
-import FontAwesome6 from '@expo/vector-icons/FontAwesome6'
-import Ionicons from '@expo/vector-icons/Ionicons'
-import { useRouter } from 'expo-router'
-import React from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import CustomText from '@/components/custom-text';
+import { Colors } from '@/constants/theme';
+import Feather from '@expo/vector-icons/Feather';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export default function HomeMenu() {
-    const router = useRouter();
-
     const AddSpendingHandling = () => {
         router.push({
-            pathname: "/(private)/add-transaction/form-add-spending"
+            pathname: "/(page)/add-transaction/form-add-spending"
         })
     }
     
     function AddIncomeHandling() {
         router.push({
-            pathname: '/(private)/add-transaction/form-add-income'
+            pathname: '/(page)/add-transaction/form-add-income'
         })
     }
 
     function AddCategoryHandling() {
         router.push({
-            pathname: '/(private)/category/add-category'
+            pathname: '/(page)/category/add-category'
         })
     }
 
