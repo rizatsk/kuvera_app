@@ -45,8 +45,7 @@ export default function RootLayout() {
       <ThemeProvider value={DefaultTheme}>
         <ReduxProvider>
           <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="(non-private)" />
-            <Stack.Screen name="(private)" />
+            <Stack.Screen name="(page)" />
             <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
           </Stack>
           <FullScreenLoader />

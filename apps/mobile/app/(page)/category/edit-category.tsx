@@ -3,24 +3,30 @@ import { TextInput } from "@/components/input/text-input/text-input";
 import { Colors } from "@/constants/theme";
 import { formatRupiah } from "@/helper/format-rupiah";
 import { useAppSelector } from "@/states";
-import { asyncAddCategorySpend } from "@/states/categories-spend/action";
+import { asyncUpdateNameCategorySpend } from "@/states/categories-spend/action";
 import { InitialSumTransactionByCategoryType } from "@/states/transaction/type";
 import { Fontisto } from "@expo/vector-icons";
-import { router } from "expo-router";
-import { useState } from "react";
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useState } from "react";
 import { StyleSheet, ToastAndroid, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 
-export default function AddCategory() {
+export default function EditCategory() {
+    const { category_id, category_name, total_spent = 0 } = useLocalSearchParams();
+
     const dispatch = useDispatch();
     const { transactions }: InitialSumTransactionByCategoryType = useAppSelector((states) => states.sumTransactionByCategory);
 
-    const [title, setTitle] = useState('Wallet');
+    const [title, setTitle] = useState('');
     const [error, setError] = useState('');
+
+    useEffect(() => {
+        setTitle(category_name as string)
+    }, [category_name])
 
     const colorCard = Colors.tealDarkKuvera;
 
-    function handleAddCategoryButton() {
+    function handleUpdateCategoryButton() {
         if (title.length < 1) {
             setError('Category is cannot empty');
             return;
@@ -32,18 +38,29 @@ export default function AddCategory() {
         }
 
         const isSameCategory = transactions.filter((trx) => trx.category_name.toLowerCase() === title.toLowerCase());
-        if (isSameCategory.length > 0) {
+        if (isSameCategory.length == 1 && isSameCategory[0].category_id === category_id) {
+            router.replace({
+                pathname: '/(page)/category/all-category'
+            });
+            ToastAndroid.show('Success update category', 500);
+            return;
+        } else if (isSameCategory.length > 0) {
             setError('Category is already available');
             return;
         }
 
-        dispatch(asyncAddCategorySpend({
-            name_category: title,
+        dispatch(asyncUpdateNameCategorySpend({
+            param: {
+                category_id: category_id as string,
+                category_name: title
+            },
             handleSuccess: () => {
+                router.dismiss();
+                router.dismiss();
                 router.replace({
-                    pathname: '/(private)/category/all-category'
+                    pathname: '/(page)/category/all-category'
                 });
-                ToastAndroid.show('Success add category', 500)
+                ToastAndroid.show('Success update category', 500)
             }
         }) as any)
     };
@@ -57,7 +74,7 @@ export default function AddCategory() {
                     </View>
                     <View>
                         <CustomText style={{ fontWeight: 600, fontSize: 20, textTransform: 'capitalize', color: colorCard }}>{title}</CustomText>
-                        <CustomText style={{ fontWeight: "700", fontSize: 17, color: colorCard }}>{formatRupiah(0)}</CustomText>
+                        <CustomText style={{ fontWeight: "700", fontSize: 17, color: colorCard }}>{formatRupiah(total_spent as number)}</CustomText>
                     </View>
                 </View>
             </View>
@@ -71,8 +88,8 @@ export default function AddCategory() {
                     onChangeText={setTitle}
                     errorMessage={error}
                 />
-                <TouchableOpacity activeOpacity={0.6} style={style.button_lanjut} onPress={handleAddCategoryButton}>
-                    <CustomText style={{ fontWeight: 600, color: "white", fontSize: 16 }}>Add Category</CustomText>
+                <TouchableOpacity activeOpacity={0.6} style={style.button_lanjut} onPress={handleUpdateCategoryButton}>
+                    <CustomText style={{ fontWeight: 600, color: "white", fontSize: 16 }}>Save Category</CustomText>
                 </TouchableOpacity>
             </View>
         </View>

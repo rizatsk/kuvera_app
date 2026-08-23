@@ -10,13 +10,13 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native'
 export default function OtherTabs() {
     const handlePrivacyPolic = () => {
         router.push({
-            pathname: '/(private)/privacy-polic'
+            pathname: '/(page)/privacy-polic'
         })
     };
 
     const handleTermsOfService = () => {
         router.push({
-            pathname: '/(private)/terms-of-service'
+            pathname: '/(page)/terms-of-service'
         })
     }
 

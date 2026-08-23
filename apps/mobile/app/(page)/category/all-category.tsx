@@ -7,18 +7,18 @@ import { Colors } from '@/constants/theme';
 import { formatRupiah } from '@/helper/format-rupiah';
 import { TransactionGroupByCategoryType } from '@/service/transaction/type';
 import { useAppSelector } from '@/states';
-import { asyncGetTransactionByCategory } from '@/states/transaction/action';
-import { InitialSumTransactionByCategoryType } from '@/states/transaction/type';
-import { MaterialIcons } from '@expo/vector-icons';
-import { router } from 'expo-router';
+import { asyncGetTransactionByCategory, setSumerizeTransactionByCategory } from '@/states/transaction/action';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
+import CardAddCategory from './card-add-category';
 
 export default function AllCategory() {
     const dispatch = useDispatch();
-    const { isLoading, transactions }: InitialSumTransactionByCategoryType = useAppSelector((states) => states.sumTransactionByCategory);
+    const { isLoading, transactions } = useAppSelector((states) => states.sumTransactionByCategory);
+    const isLogin = useAppSelector((states) => states.isLogin);
+
     const [totalSaldo, setTotalSaldo] = useState(0);
 
     // Select Date
@@ -34,7 +34,7 @@ export default function AllCategory() {
 
     useEffect(() => {
         getTransactionByCategory();
-    }, [dateTrx.keyString])
+    }, [dateTrx.keyString, isLogin])
 
     useEffect(() => {
         if (!isLoading) {
@@ -51,20 +51,18 @@ export default function AllCategory() {
     }, [transactions])
 
     const getTransactionByCategory = () => {
-        dispatch(
-            asyncGetTransactionByCategory({
-                start_date: new Date(dateTrx.start),
-                end_date: new Date(dateTrx.end as string),
-                type: 'outgoing',
-            }) as any
-        )
+        if (isLogin) {
+            dispatch(
+                asyncGetTransactionByCategory({
+                    start_date: new Date(dateTrx.start),
+                    end_date: new Date(dateTrx.end as string),
+                    type: 'outgoing',
+                }) as any
+            )
+        } else {
+            dispatch(setSumerizeTransactionByCategory(false, []));
+        }
     };
-
-    const handleAddCategory = () => {
-        router.push({
-            pathname: '/(private)/category/add-category',
-        })
-    }
 
     return (
         <View
@@ -115,17 +113,7 @@ export default function AllCategory() {
                                 </View>
                             )
                     }
-                    ListFooterComponent={(
-                        <TouchableOpacity
-                            activeOpacity={0.6}
-                            onPress={handleAddCategory}
-                            style={styles.listFooterComponent}>
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 5, justifyContent: 'center', flex: 1 }}>
-                                <MaterialIcons name="add-circle" size={26} color={Colors.tealKuvera} />
-                                <CustomText style={{ color: Colors.tealDarkKuvera, fontSize: 14, fontWeight: 600 }}>Add Category</CustomText>
-                            </View>
-                        </TouchableOpacity>
-                    )}
+                    ListFooterComponent={<CardAddCategory />}
                 />
             </View>
         </View>
@@ -133,18 +121,6 @@ export default function AllCategory() {
 }
 
 const styles = StyleSheet.create({
-    listFooterComponent: {
-        paddingLeft: 5,
-        paddingRight: 8,
-        paddingVertical: 4,
-        borderRadius: 10,
-        borderColor: Colors.tealKuvera,
-        borderWidth: 2,
-        width: '48%',
-        height: 60,
-        borderStyle: 'dashed',
-        backgroundColor: Colors.tealKuvera + 30
-    },
     monthTrxContainer: {
         backgroundColor: Colors.white[200],
         paddingHorizontal: 20,

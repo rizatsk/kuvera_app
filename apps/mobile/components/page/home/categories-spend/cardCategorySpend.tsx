@@ -42,7 +42,7 @@ export default function CardCategoryOutput({
 
     function handleButton() {
         router.push({
-            pathname: '/(private)/category/transaction-by-category',
+            pathname: '/(page)/category/transaction-by-category',
             params: {
                 dateTrx: JSON.stringify(dateTrx),
                 category_id: id,

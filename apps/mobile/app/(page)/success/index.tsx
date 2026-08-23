@@ -15,14 +15,14 @@ export default function SuccessScreen() {
     const handleButtonBack = () => {
         const path = params.type === 'incoming' ? 'income' : 'spending';
         router.replace({
-            pathname: `/(private)/add-transaction/form-add-${path}`
+            pathname: `/(page)/add-transaction/form-add-${path}`
         });
     }
 
     const handleButtonAllTransaction = () => {
         router.dismissAll();
         router.replace({
-            pathname: '/(private)/(tabs)/transaction'
+            pathname: '/(page)/(tabs)/transaction'
         })
     }
 

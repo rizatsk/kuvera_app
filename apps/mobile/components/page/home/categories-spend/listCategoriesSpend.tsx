@@ -1,8 +1,8 @@
+import CardAddCategory from '@/app/(page)/category/card-add-category';
 import { Colors } from '@/constants/theme';
 import { TransactionGroupByCategoryType } from '@/service/transaction/type';
 import { useAppSelector } from '@/states';
 import { asyncGetTransactionByCategory } from '@/states/transaction/action';
-import { InitialSumTransactionByCategoryType } from '@/states/transaction/type';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
@@ -11,9 +11,11 @@ import CardCategoryOutput from './cardCategorySpend';
 import SkeletonCardCategoryOutput from './skeleton';
 
 export default function ListCategoriesSpend() {
+    const isLogin = useAppSelector((states) => states.isLogin);
     const homeRefresh = useAppSelector((states) => states.homeRefresh);
+    const { isLoading, transactions } = useAppSelector((states) => states.sumTransactionByCategory);
+
     const [categoriesTrx, setCategoriesTrx] = useState<TransactionGroupByCategoryType[]>([]);
-    const { isLoading, transactions }: InitialSumTransactionByCategoryType = useAppSelector((states) => states.sumTransactionByCategory);
     const dispatch = useDispatch();
     const dateTrx = {
         start: moment().format('YYYY-MM') + '-01 00:00:00',
@@ -23,30 +25,32 @@ export default function ListCategoriesSpend() {
 
     useEffect(() => {
         getTransactionByCategory();
-    }, []);
+    }, [isLogin]);
 
     useEffect(() => {
-        // Jalankan saat homeRefresh true
         if (homeRefresh) {
-            getTransactionByCategory()
+            getTransactionByCategory();
         }
-    }, [homeRefresh])
+    }, [homeRefresh]);
 
     useEffect(() => {
-        if (transactions.length > 0 && !isLoading) {
+        if (transactions.length > 0 && !isLoading && isLogin) {
             const trxActive = transactions.filter((trx) => trx.category_status === true)
             setCategoriesTrx(trxActive)
+        } else if (!isLogin) {
+            setCategoriesTrx([]);
         }
-    }, [transactions])
+    }, [transactions, isLogin])
 
     const getTransactionByCategory = () => {
-        dispatch(
-            asyncGetTransactionByCategory({
-                start_date: new Date(dateTrx.start),
-                end_date: new Date(dateTrx.end),
-                type: 'outgoing',
-            }) as any
-        )
+        if (isLogin)
+            dispatch(
+                asyncGetTransactionByCategory({
+                    start_date: new Date(dateTrx.start),
+                    end_date: new Date(dateTrx.end),
+                    type: 'outgoing',
+                }) as any
+            )
     };
 
     return (
@@ -77,6 +81,7 @@ export default function ListCategoriesSpend() {
                         />
                     )
             }
+            ListEmptyComponent={<CardAddCategory />}
         />
     )
 }

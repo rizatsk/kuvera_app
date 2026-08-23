@@ -5,10 +5,27 @@ import OtherTabs from "@/components/page/profile/other-tabs";
 import PhotoProfile from "@/components/page/profile/photo-profile";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
+import { useAppSelector } from "@/states";
+import { router, useFocusEffect } from "expo-router";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
+  const isLogin = useAppSelector((states) => states.isLogin);
+
+  useFocusEffect(() => {
+    if (!isLogin) {
+      router.navigate({
+        pathname: '/(page)/login',
+        params: {
+          backToHome: 'true'
+        }
+      });
+    }
+  });
+
+  if (!isLogin) return null;
+
   return (
     <SafeAreaView
       edges={['top']}

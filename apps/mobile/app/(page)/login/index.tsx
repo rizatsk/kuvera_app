@@ -1,14 +1,60 @@
-
 import CustomText from "@/components/custom-text";
+import { BackNavigation } from "@/components/option-stack-screen";
 import environment from "@/constants/environment";
 import { Colors } from "@/constants/theme";
+import { useAppSelector } from "@/states";
 import { asyncSignInWithGoogle } from "@/states/auth-user/action";
 import { Image } from "expo-image";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { router, useFocusEffect, useLocalSearchParams, useNavigation } from "expo-router";
+import { useCallback, useEffect, useLayoutEffect } from "react";
+import { BackHandler, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 
 export default function LoginScreen() {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
+  const { backToHome } = useLocalSearchParams();
+  const isLogin = useAppSelector((states) => states.isLogin);
+
+  useEffect(() => {
+    if (isLogin) {
+      if (backToHome === 'true') {
+        router.navigate("/(page)/(tabs)")
+      } else {
+        router.back();
+      }
+    }
+  }, [isLogin])
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        console.log('masuk pak eko');
+        if (backToHome === 'true') {
+          router.navigate("/(page)/(tabs)")
+        } else {
+          router.back();
+        }
+        return true;
+      };
+
+      const subscription = BackHandler.addEventListener(
+        'hardwareBackPress',
+        onBackPress
+      );
+
+      return () => {
+        subscription.remove();
+      };
+    }, [])
+  );
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <BackNavigation backToHome={backToHome === 'true' ? true : false} />,
+    });
+  }, [navigation]);
 
   const handleSignInGoogle = () => {
     dispatch(asyncSignInWithGoogle() as any)
@@ -41,8 +87,8 @@ export default function LoginScreen() {
           <CustomText style={{ fontWeight: "bold" }}>Sign in with Google</CustomText>
         </TouchableOpacity>
 
-        <CustomText style={{marginVertical: 20, textAlign: 'center'}}>An easy-to-use income and expense management application, equipped with real-time price information for Antam Gold and the IHSG stock index. All your financial data is safe and guaranteed.</CustomText>
-        <CustomText style={{marginTop: 10}}>Version {environment.VERSION_APP}</CustomText>
+        <CustomText style={{ marginVertical: 20, textAlign: 'center' }}>An easy-to-use income and expense management application, equipped with real-time price information for Antam Gold and the IHSG stock index. All your financial data is safe and guaranteed.</CustomText>
+        <CustomText style={{ marginTop: 10 }}>Version {environment.VERSION_APP}</CustomText>
 
       </View>
     </View>

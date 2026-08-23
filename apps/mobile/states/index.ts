@@ -3,19 +3,20 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import authUserReducer from "./auth-user/reducer";
 import categoriesSpendReducer from "./categories-spend/reducer";
 import homeRefreshReducer from "./home-refresh/reducer";
-import isPreloadReducer from "./preload/reducer";
 import { sumTransactionByCategory } from "./transaction/reducer";
 import isLoadingReducer from "./visible-loading/reducer";
+import isLoginReducer from "./is-login/reducer";
+import { TypeStoreRedux } from "./type";
 
 export const store = configureStore({
   reducer: {
-    preload: isPreloadReducer,
+    isLogin: isLoginReducer,
     authUser: authUserReducer,
     visibleLoading: isLoadingReducer,
     homeRefresh: homeRefreshReducer,
     categoriesSpend: categoriesSpendReducer,
     sumTransactionByCategory: sumTransactionByCategory,
-  } as any
+  } as TypeStoreRedux
 });
 
 

@@ -31,7 +31,7 @@ export default function DetailTransaction() {
 
     const handleButtonDetail = () => {
         router.push({
-            pathname: '/(private)/edit/edit-data-transaction',
+            pathname: '/(page)/edit/edit-data-transaction',
             params: {
                 id, category_id, category_name, notes, money_spent, created_dt, type
             }

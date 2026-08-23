@@ -1,18 +1,18 @@
 
-import CustomText from '@/components/custom-text'
-import { Colors } from '@/constants/theme'
-import { formatRupiah } from '@/helper/format-rupiah'
-import { getThisMonth } from '@/helper/month'
-import { TransactionGroupByCategoryType } from '@/service/transaction/api'
-import { useAppSelector } from '@/states'
-import { InitialSumTransactionByCategoryType } from '@/states/transaction/type'
-import React from 'react'
-import { View } from 'react-native'
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder'
-import HomeMenu from './menu'
+import CustomText from '@/components/custom-text';
+import { Colors } from '@/constants/theme';
+import { formatRupiah } from '@/helper/format-rupiah';
+import { getThisMonth } from '@/helper/month';
+import { useAppSelector } from '@/states';
+import React from 'react';
+import { View } from 'react-native';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+import HomeMenu from './menu';
+import { TransactionGroupByCategoryType } from '@/service/transaction/type';
 
 export default function InvestAccountValue() {
-    const {isLoading, transactions}: InitialSumTransactionByCategoryType = useAppSelector((states) => states.sumTransactionByCategory);
+    const {isLoading, transactions} = useAppSelector((states) => states.sumTransactionByCategory);
+     const isLogin = useAppSelector((states) => states.isLogin);
 
     const thisMonth = getThisMonth();
 
@@ -28,6 +28,8 @@ export default function InvestAccountValue() {
         transactions: TransactionGroupByCategoryType[],
     ): number => {
         let total = 0;
+        if (!isLogin) return total;
+        
         transactions.map((trx) => {
             total += Number(trx.total_money_spent)
         });

@@ -11,15 +11,16 @@ import SkeletonCardRecent from './skeleton'
 
 
 export default function ListCardRecent() {
-    const homeRefresh = useAppSelector((states) => states.homeRefresh);
     const dispatch = useDispatch();
+    const homeRefresh = useAppSelector((states) => states.homeRefresh);
+    const isLogin = useAppSelector((states) => states.isLogin);
 
     const [listRecentTransactions, setListRecentTransactions] = useState<GetTransactionType[]>([])
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         getRecentTransactions()
-    }, [])
+    }, [isLogin])
 
     useEffect(() => {
         // Jalankan saat homeRefresh true
@@ -29,18 +30,19 @@ export default function ListCardRecent() {
     }, [homeRefresh])
 
     function getRecentTransactions() {
-        dispatch(
-            asyncGetTransactions({
-                param: {
-                    limit: 10,
-                    type: 'outgoing',
-                },
-                setIsLoading,
-                successHandler: (result) => {
-                    setListRecentTransactions(result);
-                }
-            }) as any
-        );
+        if (isLogin)
+            dispatch(
+                asyncGetTransactions({
+                    param: {
+                        limit: 10,
+                        type: 'outgoing',
+                    },
+                    setIsLoading,
+                    successHandler: (result) => {
+                        setListRecentTransactions(result);
+                    }
+                }) as any
+            );
     }
 
     const NotHaveTransaction = () => {
