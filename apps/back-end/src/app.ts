@@ -34,7 +34,7 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
 // Static Public Folder
 app.use("/public", express.static(path.resolve(__dirname, "../public")));
 
-loadRoutes(page);
+loadRoutes(app);
 
 let isInitialized = false;
 
