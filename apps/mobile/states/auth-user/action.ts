@@ -10,6 +10,7 @@ import { ActionReducer } from "../action";
 import { setLoading } from "../visible-loading/action";
 import { AsyncUpdateProfileUserParam, AuthUserType } from "./type";
 import { setIsLoginAction } from "../is-login/action";
+import { Platform } from "react-native";
 
 export function setAuthUserActionCreator(user: AuthUserType) {
     return {
@@ -29,8 +30,8 @@ export function unsetAuthUserActionCreator() {
     };
 }
 
-function updateProfileUserActionCreator({name, photo_profile_url}: UpdateProfileApiResponse) {
-     return {
+function updateProfileUserActionCreator({ name, photo_profile_url }: UpdateProfileApiResponse) {
+    return {
         type: ActionReducer.UPDATE_PROFILE_USER,
         payload: {
             user_update: {
@@ -46,14 +47,16 @@ export function asyncSignInWithGoogle() {
         try {
             dispatch(setLoading(true))
 
-            GoogleSignin.configure();
-            await GoogleSignin.hasPlayServices();
+            if (Platform.OS === 'android') {
+                await GoogleSignin.hasPlayServices();
+            };
+            
             const response = await GoogleSignin.signIn();
             if (isSuccessResponse(response)) {
                 const tokenGoogle = await GoogleSignin.getTokens();
 
                 // Login to service
-                const {accessToken, refreshToken} = await authAccountWithGoogle(tokenGoogle.accessToken);
+                const { accessToken, refreshToken } = await authAccountWithGoogle(tokenGoogle.accessToken);
                 console.log("Data accessToken and refreshToken", {
                     accessToken,
                     refreshToken
@@ -83,7 +86,6 @@ export function asyncUnsetAuth() {
         dispatch(setLoading(true))
         try {
             // Logout google
-            GoogleSignin.configure();
             await GoogleSignin.signOut().catch((error) => console.log('Fail google signin to logout', error));
 
             // Logout to service

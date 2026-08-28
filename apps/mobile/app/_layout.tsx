@@ -5,7 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import FullScreenLoader from '@/components/fullscreen-loader';
-import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useEffect } from 'react';
 import ReduxProvider from './provider';
 
@@ -15,7 +14,6 @@ import {
 } from '@tanstack/react-query';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded, error] = useFonts({
     'Nunito-ExtraLight': require('@/assets/fonts/nunito/Nunito-ExtraLight.ttf'),
     'Nunito-Light': require('@/assets/fonts/nunito/Nunito-Light.ttf'),

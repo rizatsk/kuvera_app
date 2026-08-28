@@ -105,3 +105,5 @@ pids/
 coverage/
 .nyc_output/
 .jest/
+.vercel
+.env*

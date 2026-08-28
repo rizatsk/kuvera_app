@@ -30,7 +30,7 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
     const [dataStockIDX, setDataStockIDX] = useState<DataStocksProps[]>([]);
     const [dataStockIDXSearch, setDataStockIDXSearch] = useState<DataStocksProps[]>([]);
     const [skeletonLoading, setSkeletonLoading] = useState(true)
-    const API_FETCH_INTERVAL = 60000;
+    const API_FETCH_INTERVAL = 3000;
 
     const {
         mutate: sendMessageMutation,
@@ -89,7 +89,7 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
 
     return (
         <FlatList<DataStocksProps | undefined>
-            refreshControl={<RefreshControl refreshing={isPending} onRefresh={sendMessageMutation} />}
+            refreshControl={<RefreshControl refreshing={false} onRefresh={sendMessageMutation} />}
             scrollEnabled={true}
             data={skeletonLoading ? Array.from({ length: 13 }) : dataStockIDXSearch}
             keyExtractor={(item, index) =>

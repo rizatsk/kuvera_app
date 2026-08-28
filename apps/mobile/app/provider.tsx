@@ -1,5 +1,6 @@
 import { store } from "@/states";
 import { asyncPreloadProcess } from "@/states/is-login/action";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 
@@ -9,6 +10,7 @@ export default function ReduxProvider({
     useEffect(() => {
         // Dispatch preload process setelah Redux context tersedia
         store.dispatch(asyncPreloadProcess() as any);
+        GoogleSignin.configure();
     }, []);
 
     return (

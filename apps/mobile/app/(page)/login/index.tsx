@@ -20,7 +20,7 @@ export default function LoginScreen() {
   useEffect(() => {
     if (isLogin) {
       if (backToHome === 'true') {
-        router.navigate("/(page)/(tabs)")
+        router.dismissTo("/(page)/(tabs)")
       } else {
         router.back();
       }
@@ -32,7 +32,7 @@ export default function LoginScreen() {
       const onBackPress = () => {
         console.log('masuk pak eko');
         if (backToHome === 'true') {
-          router.navigate("/(page)/(tabs)")
+          router.dismissTo("/(page)/(tabs)")
         } else {
           router.back();
         }

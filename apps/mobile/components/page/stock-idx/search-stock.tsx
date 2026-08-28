@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginHorizontal: 12,
         paddingHorizontal: 10,
+        paddingVertical: 10,
     },
     icon: {
         marginRight: 8,

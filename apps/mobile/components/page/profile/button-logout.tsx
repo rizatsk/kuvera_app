@@ -28,7 +28,7 @@ export default function ButtonLogout() {
           <Image
             style={{ height: 110, width: 110 }}
             contentFit='fill'
-            source={require("@/assets/images/icon/log out.webp")} />
+            source={require("@/assets/images/icon/log-out.webp")} />
         </View>
         <CustomText style={{ textAlign: 'center', fontSize: 17, fontWeight: 600, marginTop: 20 }}>Are you sure want to log out ?</CustomText>
         <CustomText style={{ textAlign: 'center', fontSize: 16, marginTop: 10 }}>You'll need to log in again to track your spending, and you can access your account whenever you want.</CustomText>
