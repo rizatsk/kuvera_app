@@ -7,28 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05893F3A89B102D9E35C517F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = EC7A07FCE123FB471686835D /* PrivacyInfo.xcprivacy */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		1A09D7BD487A4294A4D3BF93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0B523B1461743CB87E757A9 /* GoogleService-Info.plist */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		8BC21DE44A806E49DC65948A /* libPods-Kuvera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7FE20DCEF0377B939D85DF3 /* libPods-Kuvera.a */; };
+		9167CE37F339057E89F1523A /* libPods-Kuvera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE7904DA2543AEEBE2B7CAE /* libPods-Kuvera.a */; };
+		AA155E193DD94D2BA5898493 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1206077945D241EC8F980EBA /* GoogleService-Info.plist */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		E7E19982949AAC0A3431FF87 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B20A0BF8FD4448C83690859D /* PrivacyInfo.xcprivacy */; };
-		F082AEDA87D7F4F86DCC8211 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327A4A7D10BB103C84B0F552 /* ExpoModulesProvider.swift */; };
+		D1EB69F9371477EC9184B58F /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092EDD200608A35D704ED6D /* ExpoModulesProvider.swift */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1206077945D241EC8F980EBA /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Kuvera/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Kuvera.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuvera.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Kuvera/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuvera/Info.plist; sourceTree = "<group>"; };
-		327A4A7D10BB103C84B0F552 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Kuvera/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		436928900690A461DBDA96A2 /* Pods-Kuvera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuvera.release.xcconfig"; path = "Target Support Files/Pods-Kuvera/Pods-Kuvera.release.xcconfig"; sourceTree = "<group>"; };
-		7BC9EE2F9D10ED2940641B2A /* Pods-Kuvera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuvera.debug.xcconfig"; path = "Target Support Files/Pods-Kuvera/Pods-Kuvera.debug.xcconfig"; sourceTree = "<group>"; };
+		5092EDD200608A35D704ED6D /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Kuvera/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		A1E9629183EE2829D7C57D1B /* Pods-Kuvera.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuvera.debug.xcconfig"; path = "Target Support Files/Pods-Kuvera/Pods-Kuvera.debug.xcconfig"; sourceTree = "<group>"; };
+		A8BDD8D785807628B86C7F1C /* Pods-Kuvera.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Kuvera.release.xcconfig"; path = "Target Support Files/Pods-Kuvera/Pods-Kuvera.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = Kuvera/SplashScreen.storyboard; sourceTree = "<group>"; };
-		B0B523B1461743CB87E757A9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Kuvera/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B20A0BF8FD4448C83690859D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Kuvera/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		ABE7904DA2543AEEBE2B7CAE /* libPods-Kuvera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kuvera.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		D7FE20DCEF0377B939D85DF3 /* libPods-Kuvera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Kuvera.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC7A07FCE123FB471686835D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Kuvera/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Kuvera/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* Kuvera-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Kuvera-Bridging-Header.h"; path = "Kuvera/Kuvera-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -39,7 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8BC21DE44A806E49DC65948A /* libPods-Kuvera.a in Frameworks */,
+				9167CE37F339057E89F1523A /* libPods-Kuvera.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,8 +55,16 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				B0B523B1461743CB87E757A9 /* GoogleService-Info.plist */,
-				B20A0BF8FD4448C83690859D /* PrivacyInfo.xcprivacy */,
+				1206077945D241EC8F980EBA /* GoogleService-Info.plist */,
+				EC7A07FCE123FB471686835D /* PrivacyInfo.xcprivacy */,
+			);
+			name = Kuvera;
+			sourceTree = "<group>";
+		};
+		14B3B28F55E147172F37B74E /* Kuvera */ = {
+			isa = PBXGroup;
+			children = (
+				5092EDD200608A35D704ED6D /* ExpoModulesProvider.swift */,
 			);
 			name = Kuvera;
 			sourceTree = "<group>";
@@ -65,27 +73,27 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				D7FE20DCEF0377B939D85DF3 /* libPods-Kuvera.a */,
+				ABE7904DA2543AEEBE2B7CAE /* libPods-Kuvera.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3848ED8488624C4CA7995E3D /* Pods */ = {
+		686CCB6FF224A5E9A0DACADE /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				7BC9EE2F9D10ED2940641B2A /* Pods-Kuvera.debug.xcconfig */,
-				436928900690A461DBDA96A2 /* Pods-Kuvera.release.xcconfig */,
+				14B3B28F55E147172F37B74E /* Kuvera */,
+			);
+			name = ExpoModulesProviders;
+			sourceTree = "<group>";
+		};
+		762D22823AB6920367D69824 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A1E9629183EE2829D7C57D1B /* Pods-Kuvera.debug.xcconfig */,
+				A8BDD8D785807628B86C7F1C /* Pods-Kuvera.release.xcconfig */,
 			);
 			name = Pods;
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		5BEA823EF73E8DFDE028C0E0 /* ExpoModulesProviders */ = {
-			isa = PBXGroup;
-			children = (
-				C82104BFBB2E155CB0FC5C3D /* Kuvera */,
-			);
-			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -102,8 +110,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				3848ED8488624C4CA7995E3D /* Pods */,
-				5BEA823EF73E8DFDE028C0E0 /* ExpoModulesProviders */,
+				762D22823AB6920367D69824 /* Pods */,
+				686CCB6FF224A5E9A0DACADE /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -127,14 +135,6 @@
 			path = Kuvera/Supporting;
 			sourceTree = "<group>";
 		};
-		C82104BFBB2E155CB0FC5C3D /* Kuvera */ = {
-			isa = PBXGroup;
-			children = (
-				327A4A7D10BB103C84B0F552 /* ExpoModulesProvider.swift */,
-			);
-			name = Kuvera;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,13 +143,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Kuvera" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				9BDDA58BC1C24D14A3D0BADD /* [Expo] Configure project */,
+				9E8ECA619BD6CD40C90DAC8C /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				5FD2B5E2C74A221E0152063B /* [CP] Embed Pods Frameworks */,
+				81D837C15DC9988753492ED8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -199,8 +199,8 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				1A09D7BD487A4294A4D3BF93 /* GoogleService-Info.plist in Resources */,
-				E7E19982949AAC0A3431FF87 /* PrivacyInfo.xcprivacy in Resources */,
+				AA155E193DD94D2BA5898493 /* GoogleService-Info.plist in Resources */,
+				05893F3A89B102D9E35C517F /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,28 +244,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5FD2B5E2C74A221E0152063B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Kuvera/Pods-Kuvera-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/React-Core-prebuilt/React.framework/React",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ReactNativeDependencies/ReactNativeDependencies.framework/ReactNativeDependencies",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactNativeDependencies.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kuvera/Pods-Kuvera-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
@@ -318,7 +296,29 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kuvera/Pods-Kuvera-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9BDDA58BC1C24D14A3D0BADD /* [Expo] Configure project */ = {
+		81D837C15DC9988753492ED8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Kuvera/Pods-Kuvera-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/React-Core-prebuilt/React.framework/React",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ReactNativeDependencies/ReactNativeDependencies.framework/ReactNativeDependencies",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/React.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactNativeDependencies.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Kuvera/Pods-Kuvera-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9E8ECA619BD6CD40C90DAC8C /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -350,7 +350,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
-				F082AEDA87D7F4F86DCC8211 /* ExpoModulesProvider.swift in Sources */,
+				D1EB69F9371477EC9184B58F /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +359,7 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7BC9EE2F9D10ED2940641B2A /* Pods-Kuvera.debug.xcconfig */;
+			baseConfigurationReference = A1E9629183EE2829D7C57D1B /* Pods-Kuvera.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -395,7 +395,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 436928900690A461DBDA96A2 /* Pods-Kuvera.release.xcconfig */;
+			baseConfigurationReference = A8BDD8D785807628B86C7F1C /* Pods-Kuvera.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

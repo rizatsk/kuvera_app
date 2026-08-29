@@ -31,6 +31,11 @@ export default function LoginScreen() {
     useCallback(() => {
       const onBackPress = () => {
         console.log('masuk pak eko');
+        if (isLogin) {
+          router.dismissTo("/(page)/(tabs)");
+          return true;
+        }
+
         if (backToHome === 'true') {
           router.dismissTo("/(page)/(tabs)")
         } else {

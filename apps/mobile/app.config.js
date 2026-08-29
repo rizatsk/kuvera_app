@@ -4,7 +4,7 @@ export default {
         "slug": "Kuvera",
         "version": "1.5.0",
         "orientation": "portrait",
-        "icon": "./assets/images/foreground-icon.png",
+        "icon": "./assets/images/icon_kuvera_apps.png",
         "scheme": "kuveraapp",
         "userInterfaceStyle": "automatic",
         "newArchEnabled": true,
@@ -25,7 +25,7 @@ export default {
             "package": "com.rjshubkuvera",
             "adaptiveIcon": {
                 "backgroundColor": "#ffffff",
-                "foregroundImage": "./assets/images/foreground-icon.png",
+                "foregroundImage": "./assets/images/icon_kuvera_apps.png",
             },
             "edgeToEdgeEnabled": true,
             "predictiveBackGestureEnabled": false,

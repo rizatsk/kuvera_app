@@ -7,16 +7,24 @@ export default function PrivateLayout() {
             <Stack.Screen
                 name="(tabs)"
                 options={{
+                    title: '',
                     headerShown: false,
+                    headerBackButtonMenuEnabled: false,
+                    headerBackVisible: false,
+                    headerLargeTitleEnabled: false,
+                    headerShadowVisible: false,
                 }}
             />
             <Stack.Screen
                 name="add-transaction/form-add-spending"
                 options={{
                     title: "Add Spending",
+                    headerBackButtonMenuEnabled: false,
+                    headerLargeTitleEnabled: false,
+                    headerShadowVisible: false,
                     ...OptionStackScreen(),
                 }}
-            />
+                />
             <Stack.Screen
                 name="add-transaction/form-add-income"
                 options={{

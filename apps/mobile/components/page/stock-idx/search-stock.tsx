@@ -1,7 +1,7 @@
 import { Colors } from '@/constants/theme';
 import { Ionicons } from '@expo/vector-icons';
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { Platform, StyleSheet, TextInput, View } from 'react-native';
 
 type SearchBarProps = {
     onSearch: Dispatch<SetStateAction<string>>;
@@ -46,7 +46,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginHorizontal: 12,
         paddingHorizontal: 10,
-        paddingVertical: 10,
+        ...(Platform.OS === 'ios' && {
+            paddingVertical: 10,
+        }),
     },
     icon: {
         marginRight: 8,
