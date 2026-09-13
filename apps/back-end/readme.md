@@ -6,5 +6,9 @@
 ```bash
 # Generate key
 $ node
-> require('crypto').randomBytes(64).toString('hex')
+# Generate Key ENCRYPT KEY
+require('crypto').randomBytes(32).toString('hex')
+
+# Generate Key ENCRYPT KEY IV
+require('crypto').randomBytes(12).toString('hex')
 ```

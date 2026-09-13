@@ -35,6 +35,8 @@ const Environment = {
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || '',
     SUPABASE_BUCKET_NAME: process.env.SUPABASE_BUCKET_NAME || '',
     SUPABASE_BUCKET_PUBLIC_PATH: process.env.SUPABASE_BUCKET_PUBLIC_PATH || '',
+
+    OTEL_EXPORTER_OTLP_ENDPOINT: process.env.OTEL_EXPORTER_OTLP_ENDPOINT || 'http://localhost:4317',
 }
 
 export default Environment;
