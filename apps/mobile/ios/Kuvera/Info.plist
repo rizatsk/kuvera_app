@@ -46,6 +46,8 @@
     <string>12.0</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
+    <key>NFCReaderUsageDescription</key>
+    <string>Allow Kuvera need access NFC for read card.</string>
     <key>NSAppTransportSecurity</key>
     <dict>
       <key>NSAllowsArbitraryLoads</key>
@@ -93,5 +95,24 @@
     <string>Automatic</string>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
+    <key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
+    <array>
+      <string>8008</string>
+      <string>8005</string>
+      <string>0003</string>
+      <string>90b7</string>
+      <string>927a</string>
+      <string>12FC</string>
+      <string>86a7</string>
+      <string>FE00</string>
+      <string>90B7</string>
+    </array>
+    <key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+    <array>
+      <string>A00000000386980701</string>
+      <string>11223344556677</string>
+      <string>D2760000850100</string>
+      <string>D2760000850101</string>
+    </array>
   </dict>
 </plist>

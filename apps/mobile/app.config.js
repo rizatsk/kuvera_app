@@ -62,6 +62,30 @@ export default {
                     "microphonePermission": "Allow Kuvera to access your microphone",
                 }
             ],
+            [
+                "react-native-nfc-manager",
+                {
+                    "nfcPermission": "Allow Kuvera need access NFC for read card.",
+                    "systemCodes": [
+                        "8008",
+                        "8005",
+                        "0003",
+                        "90b7",
+                        "927a",
+                        "12FC",
+                        "86a7",
+                        "FE00",
+                        "8008",
+                        "90B7"
+                    ],
+                    "selectIdentifiers": [
+                        "A00000000386980701",
+                        "11223344556677",
+                        "D2760000850100",
+                        "D2760000850101",
+                    ]
+                }
+            ]
         ],
         "experiments": {
             "typedRoutes": true,

@@ -123,6 +123,13 @@ export default function PrivateLayout() {
                     ...OptionStackScreen(),
                 }}
             />
+            <Stack.Screen
+                name="card-reader-nfc/index"
+                options={{
+                    title: 'NFC',
+                    ...OptionStackScreen(),
+                }}
+            />
         </Stack>
     )
 }

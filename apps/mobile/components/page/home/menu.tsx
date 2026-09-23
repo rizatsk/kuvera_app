@@ -25,6 +25,12 @@ export default function HomeMenu() {
         router.push({
             pathname: '/(page)/category/add-category'
         })
+    };
+
+    function NfcButtonHandler() {
+        router.push({
+            pathname: '/(page)/card-reader-nfc'
+        })
     }
 
     return (
@@ -55,6 +61,12 @@ export default function HomeMenu() {
                     <FontAwesome6 name="credit-card" size={24} color={Colors.tealKuvera} />
                 </View>
                 <CustomText style={style.title}>Category</CustomText>
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.6} style={{ alignItems: 'center' }} onPress={NfcButtonHandler}>
+                <View style={style.squareIcon}>
+                    <FontAwesome6 name="credit-card" size={24} color={Colors.tealKuvera} />
+                </View>
+                <CustomText style={style.title}>NFC</CustomText>
             </TouchableOpacity>
         </View>
     )
