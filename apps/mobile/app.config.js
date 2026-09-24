@@ -62,6 +62,14 @@ export default {
                     "microphonePermission": "Allow Kuvera to access your microphone",
                 }
             ],
+            [
+                "expo-build-properties",
+                {
+                    "ios": {
+                        "enableSceneSupport": true
+                    }
+                }
+            ]
         ],
         "experiments": {
             "typedRoutes": true,
