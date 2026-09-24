@@ -66,7 +66,7 @@ export default {
                 "expo-build-properties",
                 {
                     "ios": {
-                        "enableSceneSupport": true
+                        "enableSceneSupport": true,
                     }
                 }
             ]
