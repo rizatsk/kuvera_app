@@ -67,6 +67,7 @@ export default {
                 {
                     "ios": {
                         "enableSceneSupport": true,
+                        "deploymentTarget": "16.4"
                     }
                 }
             ]

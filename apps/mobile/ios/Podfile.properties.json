@@ -3,6 +3,7 @@
   "EX_DEV_CLIENT_NETWORK_INSPECTOR": "true",
   "expo.inlineModules.watchedDirectories": "[]",
   "expo.inlineModules.xcodeProjectTargets": "{\"mainTarget\":\"Kuvera\",\"targets\":[]}",
+  "ios.deploymentTarget": "16.4",
   "ios.forceStaticLinking": "[]",
   "apple.privacyManifestAggregationEnabled": "true",
   "EXPO_USE_PRECOMPILED_MODULES": "true"
