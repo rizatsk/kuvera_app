@@ -7,7 +7,7 @@ import { asyncAddCategorySpend } from "@/states/categories-spend/action";
 import { InitialSumTransactionByCategoryType } from "@/states/transaction/type";
 import { Fontisto } from "@expo/vector-icons";
 import { router, useFocusEffect } from "expo-router";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { StyleSheet, ToastAndroid, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 
@@ -34,7 +34,7 @@ export default function AddCategory() {
 
     const colorCard = Colors.tealDarkKuvera;
 
-    function handleAddCategoryButton() {
+    const handleAddCategoryButton = useCallback(() => {
         if (title.length < 1) {
             setError('Category is cannot empty');
             return;
@@ -60,7 +60,7 @@ export default function AddCategory() {
                 ToastAndroid.show('Success add category', 500)
             }
         }) as any)
-    };
+    }, [])
 
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>

@@ -30,7 +30,6 @@ export default function LoginScreen() {
   useFocusEffect(
     useCallback(() => {
       const onBackPress = () => {
-        console.log('masuk pak eko');
         if (isLogin) {
           router.dismissTo("/(page)/(tabs)");
           return true;

@@ -29,6 +29,9 @@ export default function PrivateLayout() {
                 name="add-transaction/form-add-income"
                 options={{
                     title: "Add Income",
+                    headerBackButtonMenuEnabled: false,
+                    headerLargeTitleEnabled: false,
+                    headerShadowVisible: false,
                     ...OptionStackScreen(),
                 }}
             />

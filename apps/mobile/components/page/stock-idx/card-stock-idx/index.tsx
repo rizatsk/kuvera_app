@@ -6,7 +6,7 @@ import { Entypo } from '@expo/vector-icons';
 import { useMutation } from '@tanstack/react-query';
 import { Image } from 'expo-image';
 import { router, useFocusEffect } from 'expo-router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FlatList, RefreshControl, StyleSheet, TouchableOpacity, View } from 'react-native';
 import IsNotFoundStockIDX from './is-not-found';
 import SkeletonStockIDX from './skeleton';
@@ -28,16 +28,14 @@ type ListCardStockIdxProps = {
 
 export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
     const [dataStockIDX, setDataStockIDX] = useState<DataStocksProps[]>([]);
-    const [dataStockIDXSearch, setDataStockIDXSearch] = useState<DataStocksProps[]>([]);
     const [skeletonLoading, setSkeletonLoading] = useState(true)
-    const API_FETCH_INTERVAL = 3000;
+    const API_FETCH_INTERVAL = 500;
 
     const {
         mutate: sendMessageMutation,
         isPending
     } = useMutation({
         mutationFn: async () => {
-            console.log('masuk pak eko');
             const res = await ApiStockIdx();
             return res;
         },
@@ -67,25 +65,20 @@ export default function ListCardStockIdx({ keyword }: ListCardStockIdxProps) {
         }, [])
     )
 
-    useEffect(() => {
-        if (dataStockIDX.length > 0) {
-            switch (keyword) {
-                case 'all':
-                    setDataStockIDXSearch(dataStockIDX)
-                    break;
-                default:
-                    const lowerQuery = keyword.toLowerCase();
-                    const searchDataIDX = dataStockIDX.filter(
-                        (item) =>
-                            item.stockCode.toLowerCase().includes(lowerQuery) ||
-                            item.stockName.toLowerCase().includes(lowerQuery)
-                    );
-                    setDataStockIDXSearch(searchDataIDX)
-                    break;
+    const dataStockIDXSearch = useMemo(() => {
+        if (!dataStockIDX || dataStockIDX.length === 0) return [];
 
-            }
+        if (keyword === 'all' || !keyword) {
+            return dataStockIDX;
         }
-    }, [keyword, dataStockIDX])
+
+        const lowerQuery = keyword.toLowerCase();
+        return dataStockIDX.filter(
+            (item) =>
+                item.stockCode.toLowerCase().includes(lowerQuery) ||
+                item.stockName.toLowerCase().includes(lowerQuery)
+        );
+    }, [keyword, dataStockIDX]);
 
     return (
         <FlatList<DataStocksProps | undefined>

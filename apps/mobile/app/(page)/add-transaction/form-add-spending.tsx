@@ -1,8 +1,7 @@
-import FormAddSpending from '@/components/page/add-transaction/form-add-spending'
+import FormAddSpending from '@/components/page/add-transaction/form-add-spending';
 import { useAppSelector } from '@/states';
 import { router, useFocusEffect } from 'expo-router';
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { View } from 'react-native';
 
 export default function PageFormAddSpending() {
   const isLogin = useAppSelector((states) => states.isLogin);
@@ -19,13 +18,12 @@ export default function PageFormAddSpending() {
   });
 
   if (!isLogin) return null;
-  
+
   return (
-    <SafeAreaView
-      edges={['top']}
+    <View
       style={{ flex: 1, backgroundColor: "white", paddingHorizontal: 20 }}
     >
       <FormAddSpending />
-    </SafeAreaView>
+    </View>
   )
 }
