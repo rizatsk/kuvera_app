@@ -12,6 +12,7 @@ import {
   QueryClient,
   QueryClientProvider
 } from '@tanstack/react-query';
+import { getSettingAppFirestore } from '@/service/firestore';
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -31,6 +32,8 @@ export default function RootLayout() {
     if (loaded || error) {
       SplashScreen.hideAsync();
     }
+
+    // getSettingAppFirestore();
   }, [loaded, error]);
 
   if (!loaded && !error) {

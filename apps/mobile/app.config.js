@@ -30,7 +30,10 @@ export default {
             "edgeToEdgeEnabled": true,
             "predictiveBackGestureEnabled": false,
             "googleServicesFile": "./google-services.json",
-            "buildType": "apk"
+            "buildType": "apk",
+            "permissions": [
+                "REQUEST_INSTALL_PACKAGES"
+            ]
         },
         "plugins": [
             "expo-router",
@@ -69,6 +72,13 @@ export default {
                         "enableSceneSupport": true,
                         "deploymentTarget": "16.4"
                     }
+                }
+            ],
+            [
+                "expo-file-system",
+                {
+                    "supportsOpeningDocumentsInPlace": true,
+                    "enableFileSharing": true
                 }
             ]
         ],

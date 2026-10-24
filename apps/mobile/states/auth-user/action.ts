@@ -1,3 +1,4 @@
+import { handleGoogleSignInWithAccessToken } from "@/config/firebase";
 import { getAccountGraphQl, updateProfileApi } from "@/service/account/api";
 import { UpdateProfileApiResponse } from "@/service/account/type";
 import { authAccountWithGoogle, logoutAuth } from "@/service/auth/api";
@@ -6,20 +7,11 @@ import {
     GoogleSignin,
     isSuccessResponse
 } from '@react-native-google-signin/google-signin';
-import { ActionReducer } from "../action";
-import { setLoading } from "../visible-loading/action";
-import { AsyncUpdateProfileUserParam, AuthUserType } from "./type";
-import { setIsLoginAction } from "../is-login/action";
 import { Platform } from "react-native";
-
-export function setAuthUserActionCreator(user: AuthUserType) {
-    return {
-        type: ActionReducer.SET_AUTH,
-        payload: {
-            user: user,
-        }
-    }
-};
+import { ActionReducer } from "../action";
+import { setAuthUserActionCreator, setIsLoginAction } from "../helper";
+import { setLoading } from "../visible-loading/action";
+import { AsyncUpdateProfileUserParam } from "./type";
 
 export function unsetAuthUserActionCreator() {
     return {
@@ -68,6 +60,7 @@ export function asyncSignInWithGoogle() {
                 // Get data account
                 const user = await getAccountGraphQl();
 
+                await handleGoogleSignInWithAccessToken(tokenGoogle.accessToken);
                 dispatch(setIsLoginAction(true));
                 dispatch(setAuthUserActionCreator(user))
             } else {

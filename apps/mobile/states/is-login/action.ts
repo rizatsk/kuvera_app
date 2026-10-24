@@ -1,21 +1,24 @@
+import { auth } from "@/config/firebase";
 import { getAccountGraphQl } from "@/service/account/api";
-import { ActionReducer } from "../action";
-import { setAuthUserActionCreator } from "../auth-user/action";
+import { onAuthStateChanged, signInAnonymously } from "firebase/auth";
+import { setAuthUserActionCreator, setIsLoginAction } from "../helper";
 import { setLoading } from "../visible-loading/action";
-
-export function setIsLoginAction(isLogin: boolean) {
-    return {
-        type: ActionReducer.SET_IS_LOGIN,
-        payload: {
-            isLogin
-        }
-    }
-}
 
 export function asyncPreloadProcess() {
     return async (dispatch: any) => {
         try {
             dispatch(setLoading(true))
+
+            // Set firestore
+            onAuthStateChanged(auth, async (currentUser) => {
+                if (!currentUser) {
+                    try {
+                        await signInAnonymously(auth);
+                    } catch (error) {
+                        console.error('Error saat signInAnonymously:', error);
+                    }
+                }
+            });
             
             // Get data account
             const user = await getAccountGraphQl();

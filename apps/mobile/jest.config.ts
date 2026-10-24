@@ -1,7 +1,7 @@
 import type { Config } from 'jest';
 
 const config: Config = {
-  preset: 'jest-expo',
+  preset: 'react-native',
   collectCoverage: true,
   collectCoverageFrom: [
     "**/*.{ts,tsx}",
