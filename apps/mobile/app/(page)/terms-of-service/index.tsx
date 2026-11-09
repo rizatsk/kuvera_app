@@ -18,7 +18,7 @@ export default function TermsOfServicePage() {
 
         <CustomText style={styles.heading}>2. Eligibility</CustomText>
         <CustomText style={styles.paragraph}>
-          The App is intended for users who are 13 years old or older. By using the App, you confirm
+          The App is intended for profiles who are 13 years old or older. By using the App, you confirm
           that you meet this requirement.
         </CustomText>
 
@@ -45,7 +45,7 @@ export default function TermsOfServicePage() {
           {'\n'}▪️ Attempt to hack, disrupt, or reverse▪️engineer the App or its systems
           {'\n'}▪️ Misuse any features of the App
           {'\n'}▪️ Upload harmful or malicious content
-          {'\n'}▪️ Interfere with other users’ experience
+          {'\n'}▪️ Interfere with other profiles’ experience
           {'\n'}Any violation may result in termination or restriction of access.
         </CustomText>
 
@@ -53,7 +53,7 @@ export default function TermsOfServicePage() {
         <CustomText style={styles.paragraph}>
           Currently, account deletion is not yet available through the App. If you require assistance
           with data or account issues, contact us at: rizatsakmir@gmail.com. When account deletion
-          becomes available, the App will be updated and users will be notified.
+          becomes available, the App will be updated and profiles will be notified.
         </CustomText>
 
         <CustomText style={styles.heading}>7. No Paid Services</CustomText>

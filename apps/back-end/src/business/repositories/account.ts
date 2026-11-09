@@ -44,7 +44,7 @@ export async function getDataAccountGraphQl(account_id: string): Promise<Account
     const [results] = await sequelize.query(
         `SELECT name, email, photo_profile_url, created_dt, updated_dt 
           FROM accounts
-          JOIN users ON accounts.id = users.account_id
+          JOIN profiles ON accounts.id = profiles.account_id
           WHERE accounts.id = :id`,
         {
             replacements: { id: account_id },
