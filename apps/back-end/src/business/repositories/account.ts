@@ -2,7 +2,7 @@ import { CreationAttributes, QueryTypes } from "sequelize";
 import uuidGen from "../../config/uuid";
 import { Account } from "../../models/account";
 import { AccountType, DomainAddAccountProps, UpdateUserByAccountIdParam } from "./type";
-import { User } from "../../models/user";
+import { User } from "../../models/profile";
 import { sequelize } from "../../config/database_pg";
 
 export async function getAccountByEmail(email: string) {

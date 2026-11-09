@@ -13,7 +13,7 @@ interface UserAttributes {
 interface UserCreationAttributes extends Optional<UserAttributes, 'updated_dt'> {}
 
 @Table({
-  tableName: "users",
+  tableName: "profiles",
   timestamps: false,
 })
 export class User extends Model<User, UserCreationAttributes> {

@@ -2,7 +2,7 @@
 import { Sequelize } from "sequelize-typescript";
 import Environment from "../helper/constan/environment";
 import { Account } from "../models/account";
-import { User } from "../models/user";
+import { User } from "../models/profile";
 import { SessionAuth } from "../models/session_auth";
 import { Transaction } from "../models/transaction";
 import { CategorySpend } from "../models/category_spend";
